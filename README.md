@@ -1,135 +1,226 @@
 # Student Online Auction System
 
-A web-based auction platform where students can list items and bid on them in real time.
+## Introduction
 
-## Tech Stack
+The **Student Online Auction System** is a web-based platform that allows students to securely buy and sell items through auctions within their university community. The application provides user authentication, auction listing management, and bidding functionality through a modern full-stack web architecture.
 
-* React
-* Vite
-* TypeScript
-* Tailwind CSS
-* Node.js (backend - upcoming)
+Students can register using their university email, log in securely, and participate in auctions in a controlled environment.
 
 ---
 
-# Getting Started
+# Tech Stack
 
-Follow these steps to run the project locally.
+This project is built using the MERN stack:
 
-## 1. Clone the Repository
-
-```bash
-git clone https://github.com/<your-username>/student-online-auction-system.git
-```
-
-Navigate into the project folder:
-
-```bash
-cd student-online-auction-system
-```
+* Frontend: React + TypeScript + Tailwind CSS
+* Backend: Node.js + Express
+* Database: MongoDB
+* Authentication: JWT (JSON Web Tokens)
+* Password Security: bcrypt
 
 ---
 
-## 2. Install Dependencies
+# Features
 
-Run:
+## Authentication
 
-```bash
-npm install
-```
+* Student registration using university email
+* Secure login with encrypted passwords
+* JWT-based authentication
+* Protected routes for authenticated users
 
-This installs all required packages.
+## Auction System (Planned / In Progress)
 
----
+* Create auction listings
+* Browse active auctions
+* Place bids on items
+* Track highest bids
+* Manage user auctions
 
-## 3. Start the Development Server
+## Security
 
-Run:
-
-```bash
-npm run dev
-```
-
-You should see something like:
-
-```
-Local: http://localhost:5173
-```
-
-Open that URL in your browser.
+* Password hashing using bcrypt
+* Token-based authentication with JWT
+* Protected API routes
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
 student-online-auction-system
 │
-├── public
-├── src
-│   ├── components
-│   ├── pages
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── index.css
+├── backend
+│   ├── config
+│   │   └── db.js
+│   ├── controllers
+│   │   └── authController.js
+│   ├── middleware
+│   │   └── authMiddleware.js
+│   ├── models
+│   │   └── User.js
+│   ├── routes
+│   │   └── authRoutes.js
+│   ├── server.js
+│   └── .env
 │
-├── index.html
-├── package.json
-├── vite.config.ts
+├── frontend
+│   ├── components
+│   │   ├── Login.tsx
+│   │   ├── Register.tsx
+│   │   ├── Home.tsx
+│   │   └── ProtectedRoute.tsx
+│   ├── App.tsx
+│   └── main.tsx
+│
 └── README.md
 ```
 
 ---
 
-## Notes
+# Installation
 
-* Built with Vite for fast development.
-* Uses Tailwind CSS for styling.
-* TypeScript is used for type safety.
+## 1. Clone the repository
+
+```bash
+git clone https://github.com/nonoyobussiness/student-online-auction-system.git
+```
+
+```
+cd student-online-auction-system
+```
 
 ---
 
-## Contribution Workflow
+# Backend Setup
 
-1. Pull latest changes
-
-```bash
-git pull origin main
-```
-
-2. Create a new branch
+Navigate to the backend folder:
 
 ```bash
-git checkout -b feature/<feature-name>
+cd backend
 ```
 
-3. Make your changes and commit
+Install dependencies:
 
 ```bash
-git add .
-git commit -m "Added <feature>"
+npm install
 ```
 
-4. Push the branch
+Create a `.env` file:
+
+```
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
+
+Start the backend server:
 
 ```bash
-git push origin feature/<feature-name>
+npm run dev
 ```
 
-5. Open a Pull Request on GitHub.
+The backend will run on:
+
+```
+http://localhost:5000
+```
 
 ---
 
-## Future Features
+# Frontend Setup
 
-* User authentication
-* Create auction listings
-* Real-time bidding
-* Auction timers
-* Payment integration
+Navigate to the frontend folder:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+The frontend will run on:
+
+```
+http://localhost:5173
+```
 
 ---
 
-## Team
+# Authentication Flow
 
-Student Online Auction System Project
+```
+User Registration
+        ↓
+Password hashed using bcrypt
+        ↓
+User stored in MongoDB
+        ↓
+User Login
+        ↓
+JWT Token generated
+        ↓
+Token stored in localStorage
+        ↓
+Protected routes allow access
+```
+
+---
+
+# API Endpoints
+
+## Authentication
+
+| Method | Endpoint           | Description             |
+| ------ | ------------------ | ----------------------- |
+| POST   | /api/auth/register | Register a new user     |
+| POST   | /api/auth/login    | Authenticate user       |
+| GET    | /api/protected     | Example protected route |
+
+---
+
+# Database
+
+The application uses MongoDB to store user data.
+
+Example User Schema:
+
+```
+User
+ ├── fullName
+ ├── studentId
+ ├── email
+ ├── password (hashed)
+ └── createdAt
+```
+
+---
+
+# Future Improvements
+
+* Auction item creation
+* Bid placement system
+* Real-time bid updates
+* Email notifications
+* Password reset functionality
+
+---
+
+# License
+
+This project is intended for educational purposes.
+
+---
+
+# Author
+
+Developed as part of a student project for building a secure online auction system.
