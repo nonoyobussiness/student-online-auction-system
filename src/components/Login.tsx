@@ -9,7 +9,7 @@ export default function LoginPage() {
     const [error, setError] = useState<string>("");
 
     const isUniversityEmail = (val: string) =>
-        val.endsWith(".edu.in") || val.includes("@mahindrauniversity.") || val.includes("@uni.");
+        val.endsWith("@mahindrauniversity.edu.in");
 
     const handleSubmit = () => {
         setError("");
@@ -33,14 +33,14 @@ export default function LoginPage() {
 
             <div className="relative z-10 w-full max-w-md px-6">
                 <div className="bg-slate-900 border border-slate-700/60 rounded-2xl p-8 shadow-2xl shadow-black/40">
-                <div className="flex items-center gap-3 mb-8">
-                    <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-                        
+                    <div className="flex items-center gap-3 mb-8">
+                        <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                            
+                        </div>
+                        <div>
+                            <p className="text-white text-sm font-semibold leading-none">UniAuction</p>
+                        </div>
                     </div>
-                    <div>
-                        <p className="text-white text-sm font-semibold leading-none">UniAuction</p>
-                    </div>
-                </div>
                 <h1 className="text-2xl font-bold text-white mb-1">Sign in</h1>
                 <p className="text-slate-400 text-sm mb-7">Use your university credentials to access the platform.</p>
 
