@@ -1,1 +1,100 @@
 @import "tailwindcss";
+
+/* ============================================
+   UniAuction Design System (Final)
+   ============================================ */
+
+@theme {
+  /* ========== BRAND ========== */
+  --color-primary: 182 54% 32%;        /* #247B7B */
+  --color-primary-hover: 182 52% 38%;  /* #2D9494 */
+
+  /* ========== DARK THEME ========== */
+  --color-bg: 210 40% 7%;              /* #0C1218 */
+  --color-bg-elevated: 210 30% 12%;    /* #131B23 */
+  --color-bg-card: 210 25% 18%;        /* #1F2A36 */
+
+  /* ========== LIGHT THEME ========== */
+  --color-bg-light: 50 20% 91%;        /* #ECEBE4 */
+  --color-card-light: 0 0% 100%;       /* #FFFFFF */
+
+  /* ========== TEXT ========== */
+  --color-foreground: 50 20% 91%;      /* light text (dark mode) */
+  --color-foreground-dark: 210 30% 12%;/* dark text (light mode) */
+
+  --color-muted: 0 0% 60%;             /* #979797 */
+  --color-subtle: 0 0% 30%;            /* #4B4B4B */
+
+  /* ========== BORDERS ========== */
+  --color-border: 50 20% 91% / 0.12;
+  --color-border-strong: 0 0% 85%;
+
+  /* ========== STATUS ========== */
+  --color-live: 0 100% 50%;            /* red */
+  --color-success: 142 76% 49%;        /* green */
+  --color-warning: 25 100% 55%;        /* orange */
+
+  /* ========== RADIUS ========== */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* ========== SHADOW ========== */
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.25);
+
+  /* ========== SPACING ========== */
+  --spacing-section: 4rem;
+  --spacing-card: 1.5rem;
+  --spacing-stack: 1rem;
+}
+
+/* ============================================
+   BASE
+   ============================================ */
+
+@layer base {
+  body {
+    @apply antialiased;
+    background-color: hsl(var(--color-bg));
+    color: hsl(var(--color-foreground));
+  }
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+@layer components {
+  .text-heading {
+    @apply text-2xl font-bold tracking-tight;
+  }
+
+  .text-subheading {
+    @apply text-lg font-semibold;
+  }
+
+  .text-body {
+    @apply text-base;
+  }
+
+  .text-muted {
+    color: hsl(var(--color-muted));
+  }
+
+  .text-subtle {
+    color: hsl(var(--color-subtle));
+  }
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+.section-padding {
+  padding-top: var(--spacing-section);
+  padding-bottom: var(--spacing-section);
+}
+
+.container-narrow {
+  @apply max-w-6xl mx-auto px-4 sm:px-6;
+}
