@@ -84,9 +84,6 @@ student-online-auction-system
 
 ```bash
 git clone https://github.com/nonoyobussiness/student-online-auction-system.git
-```
-
-```
 cd student-online-auction-system
 ```
 
@@ -94,15 +91,8 @@ cd student-online-auction-system
 
 # Backend Setup
 
-Navigate to the backend folder:
-
 ```bash
 cd backend
-```
-
-Install dependencies:
-
-```bash
 npm install
 ```
 
@@ -114,13 +104,13 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 ```
 
-Start the backend server:
+Run backend:
 
 ```bash
 npm run dev
 ```
 
-The backend will run on:
+Backend runs on:
 
 ```
 http://localhost:5000
@@ -130,25 +120,13 @@ http://localhost:5000
 
 # Frontend Setup
 
-Navigate to the frontend folder:
-
 ```bash
 cd frontend
-```
-
-Install dependencies:
-
-```bash
 npm install
-```
-
-Run the development server:
-
-```bash
 npm run dev
 ```
 
-The frontend will run on:
+Frontend runs on:
 
 ```
 http://localhost:5173
@@ -180,17 +158,15 @@ Protected routes allow access
 
 ## Authentication
 
-| Method | Endpoint           | Description             |
-| ------ | ------------------ | ----------------------- |
-| POST   | /api/auth/register | Register a new user     |
-| POST   | /api/auth/login    | Authenticate user       |
-| GET    | /api/protected     | Example protected route |
+| Method | Endpoint           | Description         |
+|--------|------------------|---------------------|
+| POST   | /api/auth/register | Register a user    |
+| POST   | /api/auth/login    | Login user         |
+| GET    | /api/protected     | Protected route    |
 
 ---
 
 # Database
-
-The application uses MongoDB to store user data.
 
 Example User Schema:
 
@@ -205,22 +181,147 @@ User
 
 ---
 
+# 👥 Team Collaboration (GitHub Workflow)
+
+This project uses a structured workflow on GitHub to avoid conflicts and keep the codebase clean.
+
+## 🔑 Core Rule
+
+❗ Never push directly to `main`
+
+---
+
+## Branch Strategy
+
+Each developer works on their own branch:
+
+```
+feature/<name>/<task>
+```
+
+Examples:
+
+```
+feature/rahul/login-page
+feature/ananya/register-api
+feature/akash/navbar-ui
+```
+
+---
+
+## 🧑‍💻 Steps for Team Members
+
+### 1. Clone repository
+
+```bash
+git clone <repo-url>
+cd student-online-auction-system
+```
+
+---
+
+### 2. Create a branch
+
+```bash
+git checkout -b feature/<name>/<task>
+```
+
+---
+
+### 3. Do your work
+
+Work only on your assigned feature.
+
+---
+
+### 4. Commit changes
+
+```bash
+git add .
+git commit -m "Add: login page UI"
+```
+
+---
+
+### 5. Push branch
+
+```bash
+git push origin feature/<name>/<task>
+```
+
+---
+
+## 🔁 Pull Request Process
+
+After pushing:
+
+1. Go to GitHub
+2. Click **Compare & Pull Request**
+3. Add:
+   - Description of changes
+   - Screenshots (for UI work)
+
+---
+
+## 👨‍💼 Team Lead Responsibilities
+
+- Review code before merging
+- Ensure UI matches design
+- Maintain clean structure
+
+Only the lead merges into `main`.
+
+---
+
+## 🔄 Sync with Latest Code
+
+Run this daily:
+
+```bash
+git checkout main
+git pull origin main
+git checkout feature/<your-branch>
+git merge main
+```
+
+---
+
+## ✅ Rules to Follow
+
+- No direct push to `main`
+- One feature = one branch
+- One PR = one task
+- Follow project structure strictly
+
+---
+
+## 🧠 Commit Message Examples
+
+```
+Add: registration API
+Fix: login bug
+Update: navbar styling
+```
+
+---
+
 # Future Improvements
 
 * Auction item creation
 * Bid placement system
-* Real-time bid updates
+* Real-time updates (WebSockets)
 * Email notifications
-* Password reset functionality
+* Password reset
 
 ---
 
 # License
 
-This project is intended for educational purposes.
+This project is for educational purposes.
 
 ---
 
 # Author
 
 Developed as part of a student project for building a secure online auction system.
+
