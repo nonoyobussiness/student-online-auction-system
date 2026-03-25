@@ -52,7 +52,7 @@ src/
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm (comes with Node)
 
 ### Steps
@@ -136,7 +136,7 @@ export default function MyComponent({ title }: MyComponentProps) {
 
 ## 6. Work Division (CRITICAL)
 
-### Developer 1 (Beginner) – UI Components
+### Batch 1 – UI Components
 
 **Scope:** `src/components/ui/`
 
@@ -151,7 +151,7 @@ export default function MyComponent({ title }: MyComponentProps) {
 
 ---
 
-### Developer 2 (Intermediate) – Sections
+### Batch 2 – Sections
 
 **Scope:** `src/components/sections/`
 
@@ -166,7 +166,7 @@ export default function MyComponent({ title }: MyComponentProps) {
 
 ---
 
-### Developer 3 (Advanced) – Layout & Integration
+### Batch 3 – Layout & Integration
 
 **Scope:** `src/components/layout/`, `src/pages/`, integration
 
@@ -178,6 +178,47 @@ export default function MyComponent({ title }: MyComponentProps) {
   - Responsive layout and sidebar behavior.
   - Ensure `pages/Home.tsx` composes all sections correctly.
 - May need to add hooks in `hooks/` and types in `types/`.
+
+---
+
+## 6.1 Design Replication Requirement (VERY IMPORTANT)
+
+All contributors **must strictly replicate the wireframes provided in**:
+
+```
+src/assets/designs/
+```
+
+### What this means:
+
+- Treat the designs as the **source of truth** for:
+  - Layout
+  - Spacing
+  - Component structure
+  - Visual hierarchy
+
+- Your goal is **not to redesign**, but to **accurately implement** what is already designed.
+
+### Guidelines:
+
+- Match:
+  - Alignment and spacing (use Tailwind utilities like `gap`, `padding`, `margin`)
+  - Component placement and grouping
+  - Typography scale and emphasis
+- Reuse existing components from `components/ui` wherever possible.
+- If a design element doesn’t exist:
+  - Create a reusable component (don’t hardcode it inside a page/section).
+
+### What NOT to do:
+
+- ❌ Do not change layouts “because it looks better”
+- ❌ Do not invent new UI patterns unless explicitly required
+- ❌ Do not ignore designs and build from imagination
+
+### If something is unclear:
+
+- Check other implemented sections for patterns
+- Ask before deviating from the design
 
 ---
 
@@ -229,3 +270,4 @@ export default function MyComponent({ title }: MyComponentProps) {
 ---
 
 Happy coding. If you’re stuck, check existing components for patterns.
+
