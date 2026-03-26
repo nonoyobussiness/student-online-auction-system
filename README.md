@@ -2,19 +2,19 @@
 
 ## Introduction
 
-The **Student Online Auction System** is a web-based platform that allows students to securely buy and sell items through auctions within their university community. The application provides user authentication, auction listing management, and bidding functionality through a modern full-stack web architecture.
+The **Student Online Auction System** is a web-based platform for a university student marketplace. It currently provides user authentication and a demo homepage with auction listings.
 
-Students can register using their university email, log in securely, and participate in auctions in a controlled environment.
+Auction creation and bidding APIs are not implemented yet; the UI uses mock data for the auction sections.
 
 ---
 
 # Tech Stack
 
-This project is built using the MERN stack:
+This project is a MERN-style app (React + Node/Express + MongoDB):
 
-* Frontend: React + TypeScript + Tailwind CSS
+* Frontend: React + TypeScript + Tailwind CSS (Vite)
 * Backend: Node.js + Express
-* Database: MongoDB
+* Database: MongoDB (via Mongoose)
 * Authentication: JWT (JSON Web Tokens)
 * Password Security: bcrypt
 
@@ -22,26 +22,26 @@ This project is built using the MERN stack:
 
 # Features
 
-## Authentication
+## Authentication (Implemented)
 
-* Student registration using university email
-* Secure login with encrypted passwords
-* JWT-based authentication
-* Protected routes for authenticated users
+* Student registration and login endpoints:
+  * `POST /api/auth/register`
+  * `POST /api/auth/login`
+* Password hashing with `bcrypt`
+* JWT issued on login and stored by the frontend in `localStorage` under `token`
+* Protected API route:
+  * `GET /api/protected` (requires `Authorization: Bearer <token>`)
+* Note: the frontend UI restricts email inputs to the `@mahindrauniversity.edu.in` domain.
+* Client-side route protection for `/home` exists via `src/components/ProtectedRoute.tsx`, but is not currently enabled in `src/App.tsx`.
 
-## Auction System (Planned / In Progress)
+## Auction UI (Mock / Demo)
 
-* Create auction listings
-* Browse active auctions
-* Place bids on items
-* Track highest bids
-* Manage user auctions
+* `LiveBids` renders auction cards using mock data (no real auctions/bidding API yet)
+* Auction creation, bidding, and real-time updates are not implemented on the backend yet
 
 ## Security
 
-* Password hashing using bcrypt
-* Token-based authentication with JWT
-* Protected API routes
+* JWT verification in `backend/middleware/authMiddleware.js`
 
 ---
 
@@ -62,16 +62,13 @@ student-online-auction-system
 │   ├── routes
 │   │   └── authRoutes.js
 │   ├── server.js
-│   └── .env
+│   └── .env.example
 │
-├── frontend
-│   ├── components
-│   │   ├── Login.tsx
-│   │   ├── Register.tsx
-│   │   ├── Home.tsx
-│   │   └── ProtectedRoute.tsx
-│   ├── App.tsx
-│   └── main.tsx
+├── src
+│   ├── components/
+│   ├── pages/
+│   ├── main.tsx / App.tsx
+│   └── MANUAL/README_DEV.md
 │
 └── README.md
 ```
@@ -96,13 +93,19 @@ cd backend
 npm install
 ```
 
-Create a `.env` file:
+Create a backend `.env` file from the example:
 
+```bash
+cp .env.example .env
 ```
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-```
+
+Then edit `backend/.env`:
+
+Do not commit `backend/.env` to git.
+
+* `PORT` (defaults to `5000`)
+* `MONGO_URI`
+* `JWT_SECRET`
 
 Run backend:
 
@@ -121,7 +124,7 @@ http://localhost:5000
 # Frontend Setup
 
 ```bash
-cd frontend
+cd ..
 npm install
 npm run dev
 ```
@@ -149,7 +152,7 @@ JWT Token generated
         ↓
 Token stored in localStorage
         ↓
-Protected routes allow access
+Protected API routes accept the token via `Authorization: Bearer <token>`
 ```
 
 ---
@@ -162,7 +165,7 @@ Protected routes allow access
 |--------|------------------|---------------------|
 | POST   | /api/auth/register | Register a user    |
 | POST   | /api/auth/login    | Login user         |
-| GET    | /api/protected     | Protected route    |
+| GET    | /api/protected     | Requires Bearer token |
 
 ---
 
@@ -181,11 +184,11 @@ User
 
 ---
 
-# 👥 Team Collaboration (GitHub Workflow)
+# Team Collaboration (GitHub Workflow)
 
 This project uses a structured workflow on GitHub to avoid conflicts and keep the codebase clean.
 
-## 🔑 Core Rule
+## Core Rule
 
 ❗ Never push directly to `main`
 
@@ -209,7 +212,7 @@ feature/akash/navbar-ui
 
 ---
 
-## 🧑‍💻 Steps for Team Members
+##  Steps for Team Members
 
 ### 1. Clone repository
 
@@ -251,7 +254,7 @@ git push origin feature/<name>/<task>
 
 ---
 
-## 🔁 Pull Request Process
+## Pull Request Process
 
 After pushing:
 
@@ -263,7 +266,7 @@ After pushing:
 
 ---
 
-## 👨‍💼 Team Lead Responsibilities
+## Team Lead Responsibilities
 
 - Review code before merging
 - Ensure UI matches design
@@ -273,7 +276,7 @@ Only the lead merges into `main`.
 
 ---
 
-## 🔄 Sync with Latest Code
+## Sync with Latest Code
 
 Run this daily:
 
@@ -286,7 +289,7 @@ git merge main
 
 ---
 
-## ✅ Rules to Follow
+## Rules to Follow
 
 - No direct push to `main`
 - One feature = one branch
@@ -295,7 +298,7 @@ git merge main
 
 ---
 
-## 🧠 Commit Message Examples
+## Commit Message Examples
 
 ```
 Add: registration API
@@ -307,8 +310,8 @@ Update: navbar styling
 
 # Future Improvements
 
-* Auction item creation
-* Bid placement system
+* Connect `LiveBids` to real auction listing APIs (replace mock data)
+* Backend auction item creation + bid placement (and UI wiring)
 * Real-time updates (WebSockets)
 * Email notifications
 * Password reset
