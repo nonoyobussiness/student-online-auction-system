@@ -325,5 +325,3 @@ This project is for educational purposes.
 
 Developed as part of a student project for building a secure online auction system.
 
-- Prosmuggler
-
