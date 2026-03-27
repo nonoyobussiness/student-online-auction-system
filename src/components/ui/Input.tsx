@@ -17,10 +17,12 @@ import type { InputHTMLAttributes } from "react";
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
+  ariaLabel?: string; // Custom aria-label for accessibility
 }
 
+
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, className = "", id, ...props }, ref) => {
+  ({ label, error, className = "", id, ariaLabel, ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s/g, "-");
 
     return (
@@ -36,16 +38,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={inputId}
+          aria-label={ariaLabel}
           className={`
             w-full text-sm rounded-xl px-4 py-2.5
             bg-bg-card border border-border
             text-foreground placeholder:text-subtle
             outline-none transition
-            focus:border-primary focus:ring-2 focus:ring-primary/20
+            focus:border-primary focus:ring-2 focus:ring-primary/40 focus:outline-none
             disabled:opacity-50 disabled:cursor-not-allowed
             ${error ? "border-red-500 focus:border-red-500" : ""}
             ${className}
           `.trim().replace(/\s+/g, " ")}
+          tabIndex={0}
           {...props}
         />
         {error && (

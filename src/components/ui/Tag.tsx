@@ -18,6 +18,7 @@ export interface TagProps {
   /** Makes tag clickable */
   onClick?: () => void;
   className?: string;
+  ariaLabel?: string; // Custom aria-label for accessibility
 }
 
 export default function Tag({
@@ -25,6 +26,7 @@ export default function Tag({
   active = false,
   onClick,
   className = "",
+  ariaLabel,
 }: TagProps) {
   const isClickable = !!onClick;
 
@@ -44,11 +46,31 @@ export default function Tag({
 
   if (isClickable) {
     return (
-      <button type="button" onClick={onClick} className={baseStyles}>
+      <button
+        type="button"
+        onClick={onClick}
+        className={baseStyles}
+        aria-label={ariaLabel}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onClick();
+          }
+        }}
+        style={{ outline: "none" }}
+      >
         {children}
       </button>
     );
   }
 
-  return <span className={baseStyles}>{children}</span>;
-}
+  return (
+    <span
+      className={baseStyles}
+      aria-label={ariaLabel}
+    >
+      {children}
+    </span>
+  )
+};
