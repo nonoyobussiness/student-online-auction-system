@@ -39,13 +39,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           id={inputId}
           aria-label={ariaLabel}
+          style={{ fontFamily: "DM Sans, sans-serif" }}
           className={`
-            w-full text-sm rounded-xl px-4 py-2.5
-            bg-bg-card border border-border
+            w-full text-sm rounded-xl px-4 py-2.5 font-normal text-left
+            bg-[#132023] border-2 border-[#20B2B2]
             text-foreground placeholder:text-subtle
-            outline-none transition
-            focus:border-primary focus:ring-2 focus:ring-primary/40 focus:outline-none
-            disabled:opacity-50 disabled:cursor-not-allowed
+            outline-none transition-all duration-200
+            focus:bg-[#1a2d31] focus:border-[#2ec4c4] focus:ring-2 focus:ring-[#20B2B2]/30 focus:outline-none
+            disabled:bg-[#132023]/40 disabled:border-[#20B2B2]/40 disabled:cursor-not-allowed
             ${error ? "border-red-500 focus:border-red-500" : ""}
             ${className}
           `.trim().replace(/\s+/g, " ")}
