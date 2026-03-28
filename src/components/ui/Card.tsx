@@ -1,59 +1,78 @@
-/**
- * Card - Premium UI container (Design System)
- */
-
 import type { ReactNode } from "react";
 
 type CardPadding = "none" | "sm" | "md" | "lg";
+type CardVariant = "default" | "elevated" | "auction";
+type CardTheme = "dark" | "light";
 
 export interface CardProps {
   children: ReactNode;
   padding?: CardPadding;
+  variant?: CardVariant;
+  theme?: CardTheme;
   onClick?: () => void;
   className?: string;
-  hover?: boolean;
 }
 
 const paddingStyles: Record<CardPadding, string> = {
   none: "p-0",
   sm: "p-3",
   md: "p-4",
-  lg: "p-5",
+  lg: "p-6",
+};
+
+const baseStyles = `
+  rounded-xl
+  overflow-hidden
+  transition-all duration-300 ease-out
+`;
+
+const themeStyles: Record<CardTheme, string> = {
+  dark: `
+    bg-[#0B1F23]
+    border border-[#1E3A3F]
+  `,
+  light: `
+    bg-white
+    border border-gray-200
+  `,
+};
+
+const variantStyles: Record<CardVariant, string> = {
+  default: "",
+  elevated: "shadow-lg",
+  auction: "w-[220px]", // 👈 exact size from design
+};
+
+const hoverStyles: Record<CardTheme, string> = {
+  dark: `
+    hover:shadow-md
+    hover:-translate-y-[2px]
+  `,
+  light: `
+    hover:shadow-lg
+    hover:-translate-y-[2px]
+  `,
 };
 
 export default function Card({
   children,
   padding = "md",
+  variant = "default",
+  theme = "dark",
   onClick,
   className = "",
-  hover = true,
 }: CardProps) {
   const isInteractive = !!onClick;
 
   return (
     <div
       className={`
-        relative
-        rounded-2xl
-        bg-[linear-gradient(180deg,#0f2a2e,#0b1f23)]
-        border border-white/10
-
-        shadow-[0_4px_20px_rgba(0,0,0,0.4)]
-        transition-all duration-300 ease-out
-
+        ${baseStyles}
+        ${themeStyles[theme]}
         ${paddingStyles[padding]}
+        ${variantStyles[variant]}
 
-        ${
-          hover || isInteractive
-            ? "hover:shadow-[0_10px_30px_rgba(45,212,191,0.15)] hover:-translate-y-1 hover:border-teal-400/40"
-            : ""
-        }
-
-        ${
-          isInteractive
-            ? "cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-400/40"
-            : ""
-        }
+        ${isInteractive ? `cursor-pointer ${hoverStyles[theme]}` : ""}
 
         ${className}
       `.trim().replace(/\s+/g, " ")}
@@ -71,9 +90,6 @@ export default function Card({
       role={isInteractive ? "button" : undefined}
       tabIndex={isInteractive ? 0 : undefined}
     >
-      {/* subtle glow overlay */}
-      <div className="absolute inset-0 rounded-2xl pointer-events-none bg-gradient-to-br from-teal-400/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-
       {children}
     </div>
   );
