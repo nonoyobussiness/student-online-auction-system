@@ -4,6 +4,7 @@ import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import ButtonPreview from "./components/ui/ButtonPreview";
+import BadgePreview from "./components/ui/BadgePreview";
 
 export default function App() {
   return (
@@ -20,7 +21,8 @@ export default function App() {
           <Home/>
         }
       />
-      <Route path="/button" element={<ButtonPreview />} />
+      <Route path="/buttons" element={<ButtonPreview />} />
+      <Route path="/badges" element={<BadgePreview />} />
     </Routes>
   );
 }
