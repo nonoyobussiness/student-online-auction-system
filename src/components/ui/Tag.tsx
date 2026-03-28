@@ -12,6 +12,7 @@
 import type { ReactNode } from "react";
 
 type TagVariant = "main" | "normal";
+type TagTheme = "light" | "dark";
 
 export interface TagProps {
   children: ReactNode;
@@ -19,6 +20,8 @@ export interface TagProps {
   active?: boolean;
   /** Visual style variant */
   variant?: TagVariant;
+  /** Theme style variant */
+  theme?: TagTheme;
   /** Makes tag clickable */
   onClick?: () => void;
   className?: string;
@@ -29,22 +32,29 @@ export default function Tag({
   children,
   active = false,
   variant = "normal",
+  theme = "dark",
   onClick,
   className = "",
   ariaLabel,
 }: TagProps) {
   const isClickable = !!onClick;
 
-  const variantStyles: Record<TagVariant, string> = {
-    main: "bg-[rgba(32,178,178,1)] text-[#131B23]",
-    normal: "bg-[rgba(53,126,126,0.17)] text-[#FFFFFF]",
+  const variantStyles: Record<TagTheme, Record<TagVariant, string>> = {
+    dark: {
+      main: "bg-[rgba(32,178,178,1)] text-[#131B23]",
+      normal: "bg-[rgba(53,126,126,0.17)] text-[#FFFFFF]",
+    },
+    light: {
+      main: "bg-[rgba(32,178,178,1)] text-[#FFFFFF]",
+      normal: "bg-[rgba(53,126,126,0.17)] text-[#131B23]",
+    },
   };
 
   const baseStyles = [
     "inline-flex items-center justify-center px-3 py-1 rounded-full text-sm font-normal text-center",
     "transition-colors duration-200",
     "border-0",
-    variantStyles[variant],
+    variantStyles[theme][variant],
     isClickable ? "cursor-pointer hover:opacity-85" : "",
     active ? "opacity-100" : "",
     className,
