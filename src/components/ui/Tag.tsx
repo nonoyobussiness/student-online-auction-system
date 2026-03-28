@@ -50,12 +50,35 @@ export default function Tag({
     },
   };
 
+  const hoverStyles: Record<TagTheme, Record<TagVariant, string>> = {
+    dark: {
+      main: "hover:bg-[rgba(86,224,224,1)]",
+      normal: "hover:bg-[rgba(53,126,126,0.5)]",
+    },
+    light: {
+      main: "hover:bg-[rgba(45,148,148,1)]",
+      normal: "hover:bg-[rgba(53,126,126,0.33)]",
+    },
+  };
+
+  const activeStyles: Record<TagTheme, Record<TagVariant, string>> = {
+    dark: {
+      main: "bg-[rgba(108,238,238,1)] text-[#131B23]",
+      normal: "bg-[rgba(53,126,126,0.65)] text-[#FFFFFF]",
+    },
+    light: {
+      main: "bg-[rgba(28,116,116,1)] text-[#FFFFFF]",
+      normal: "bg-[rgba(53,126,126,0.5)] text-[#131B23]",
+    },
+  };
+
   const baseStyles = [
     "inline-flex items-center justify-center px-3 py-1 rounded-full text-sm font-normal text-center",
     "transition-colors duration-200",
     "border-0",
-    variantStyles[theme][variant],
-    isClickable ? "cursor-pointer hover:opacity-85" : "",
+    active ? activeStyles[theme][variant] : variantStyles[theme][variant],
+    active ? "" : hoverStyles[theme][variant],
+    isClickable ? "cursor-pointer" : "",
     active ? "opacity-100" : "",
     className,
   ]
