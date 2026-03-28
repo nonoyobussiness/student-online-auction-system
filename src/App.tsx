@@ -3,7 +3,6 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
-import Playground from "./pages/Playground";
 
 export default function App() {
   return (
@@ -20,7 +19,6 @@ export default function App() {
           <Home/>
         }
       />
-      <Route path="/playground" element={<Playground />} />
     </Routes>
   );
 }
