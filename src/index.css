@@ -58,6 +58,24 @@
     background-color: hsl(var(--color-bg));
     color: hsl(var(--color-foreground));
   }
+  :root {
+  /* ============================================
+     BUTTON TOKENS
+     ============================================ */
+    /* DARK THEME */
+    --btn-primary-bg: 182 54% 32%;     /* teal */
+    --btn-primary-text: 210 30% 12%;
+
+    --btn-secondary-bg: 50 20% 91%;
+    --btn-secondary-text: 182 54% 32%;
+
+    /* LIGHT THEME */
+    --btn-primary-bg-light: 180 100% 25%; /* #008080 */
+    --btn-primary-text-light: 50 20% 91%;
+
+    --btn-secondary-bg-light: 210 30% 12%;
+    --btn-secondary-text-light: 182 54% 32%;
+  }
 }
 
 /* ============================================
