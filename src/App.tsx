@@ -20,7 +20,7 @@ export default function App() {
           <Home/>
         }
       />
-      <Route path="/button-preview" element={<ButtonPreview />} />
+      <Route path="/button" element={<ButtonPreview />} />
     </Routes>
   );
 }

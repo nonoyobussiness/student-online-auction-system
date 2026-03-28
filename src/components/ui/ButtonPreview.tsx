@@ -2,136 +2,77 @@ import Button from "./Button";
 
 export default function ButtonPreview() {
   return (
-    <div className="min-h-screen bg-bg p-8 space-y-8">
+    <div className="min-h-screen bg-bg p-8 space-y-10">
       
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Primary</h2>
-        <div className="flex gap-4 flex-wrap">
-          <Button size="sm">Small</Button>
-          <Button size="md">Medium</Button>
-          <Button size="lg">Large</Button>
-          <Button size="compact">Compact</Button>
-          <Button disabled>Disabled</Button>
-        </div>
-      </div>
+      {/* ================= PRIMARY (DARK) ================= */}
+      <Section title="Primary (Dark)">
+        <Button size="sm">Small</Button>
+        <Button size="md">Medium</Button>
+        <Button size="lg">Large</Button>
+        <Button disabled>Disabled</Button>
+      </Section>
 
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Secondary</h2>
-        <div className="flex gap-4 flex-wrap">
-          <Button variant="secondary" size="sm">Small</Button>
-          <Button variant="secondary">Medium</Button>
-          <Button variant="secondary" size="lg">Large</Button>
-        </div>
-      </div>
+      {/* ================= SECONDARY (DARK) ================= */}
+      <Section title="Secondary (Dark)">
+        <Button variant="secondary" size="sm">Small</Button>
+        <Button variant="secondary">Medium</Button>
+        <Button variant="secondary" size="lg">Large</Button>
+      </Section>
 
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Outline</h2>
-        <div className="flex gap-4 flex-wrap">
-          <Button variant="outline" size="sm">Small</Button>
-          <Button variant="outline">Medium</Button>
-          <Button variant="outline" size="lg">Large</Button>
-        </div>
-      </div>
+      {/* ================= PRIMARY (LIGHT) ================= */}
+      <Section title="Primary (Light)">
+        <Button theme="light" size="sm">Small</Button>
+        <Button theme="light">Medium</Button>
+        <Button theme="light" size="lg">Large</Button>
+      </Section>
 
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Ghost</h2>
-        <div className="flex gap-4 flex-wrap">
-          <Button variant="ghost">Ghost</Button>
-        </div>
-      </div>
+      {/* ================= SECONDARY (LIGHT) ================= */}
+      <Section title="Secondary (Light)">
+        <Button theme="light" variant="secondary" size="sm">Small</Button>
+        <Button theme="light" variant="secondary">Medium</Button>
+        <Button theme="light" variant="secondary" size="lg">Large</Button>
+      </Section>
 
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">PrimaryLight</h2>
-        <div className="flex gap-4 flex-wrap">
-          <Button variant="primaryLight" size="sm">Small</Button>
-          <Button variant="primaryLight" size="md">Medium</Button>
-          <Button variant="primaryLight" size="lg">Large</Button>
-          <Button variant="primaryLight" size="compact">Compact</Button>
-          <Button variant="primaryLight" disabled>Disabled</Button>
-        </div>
-      </div>
+      {/* ================= REAL USE CASES ================= */}
+      <Section title="Real Buttons (From Design)">
+        <Button variant="secondary">Sign up</Button>
+        <Button>+ Start Selling</Button>
+        <Button size="sm">Place Bid</Button>
+        <Button size="lg">Get Started Now</Button>
+      </Section>
 
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">SecondaryLight</h2>
-        <div className="flex gap-4 flex-wrap">
-          <Button variant="secondaryLight" size="sm">Small</Button>
-          <Button variant="secondaryLight" size="md">Medium</Button>
-          <Button variant="secondaryLight" size="lg">Large</Button>
-          <Button variant="secondaryLight" size="compact">Compact</Button>
-          <Button variant="secondaryLight" disabled>Disabled</Button>
-        </div>
-      </div>
+      {/* ================= LIGHT USE CASES ================= */}
+      <Section title="Real Buttons (Light)">
+        <Button theme="light" variant="secondary">Sign up</Button>
+        <Button theme="light">+ Start Selling</Button>
+        <Button theme="light" size="sm">Place Bid</Button>
+        <Button theme="light" size="lg">Get Started Now</Button>
+      </Section>
 
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Login</h2>
-        <div className="flex gap-4 flex-wrap">
-        <Button variant="Login">Log in</Button>
-        </div>
-      </div>
+      {/* ================= WIDTH TEST ================= */}
+      <Section title="Layout Behavior">
+        <Button className="w-full">Full Width</Button>
+        <Button className="w-[200px]">Fixed Width</Button>
+        <Button>Auto Width</Button>
+      </Section>
 
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Start selling</h2>
-        <div className="flex gap-4 flex-wrap">
-        <Button variant="Start Selling">+ Start Selling</Button>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Get Started</h2>
-        <div className="flex gap-4 flex-wrap">
-        <Button variant="Get Started" radius= "rounded">Get Started Now</Button>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Sign up</h2>
-        <div className="flex gap-4 flex-wrap">
-        <Button variant="signup" radius="pill">Sign up</Button>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">View All</h2>
-        <div className="flex gap-4 flex-wrap">
-        <Button variant="viewall" radius="smallpill" >View All</Button>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        <h2 className="text-lg font-semibold text-foreground">Place Bid</h2>
-        <div className="flex gap-4 flex-wrap">
-          <Button variant="PlaceBid">Place Bid</Button>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-    <h2 className="text-lg font-semibold text-white">Light Theme</h2>
-
-    <div className="flex gap-4 flex-wrap">
-    <Button variant="LoginLight">Log in</Button>
-
-    <Button variant="StartSellingLight">
-      + Start Selling
-    </Button>
-
-    <Button variant="GetStartedLight" radius="rounded">
-      Get Started Now
-    </Button>
-
-    <Button variant="signupLight" radius="pill">
-      Sign up
-    </Button>
-
-    <Button variant="viewallLight" radius="smallpill">
-      View All
-    </Button>
-
-    <Button variant="PlaceBidLight" radius="smallpill">
-      Place Bid
-    </Button>
     </div>
-    </div>
+  );
+}
 
+/* ================= REUSABLE SECTION ================= */
+
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="space-y-3">
+      <h2 className="text-lg font-semibold text-foreground">{title}</h2>
+      <div className="flex gap-4 flex-wrap">{children}</div>
     </div>
   );
 }
