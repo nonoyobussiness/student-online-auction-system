@@ -1,63 +1,62 @@
-/**
- * Button - Reusable button component
- *
- * How to use:
- *   <Button variant="primary">Click me</Button>
- *   <Button variant="secondary" size="sm">Small</Button>
- *
- * Props:
- *   - variant: "primary" | "secondary" | "outline" - changes appearance
- *   - size: "sm" | "md" | "lg" - changes padding and text size
- *   - fullWidth: makes button span full container width
- */
-
 import type { ButtonHTMLAttributes } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "outline";
+type ButtonVariant = "primary" | "secondary";
+type ButtonTheme = "dark" | "light";
 type ButtonSize = "sm" | "md" | "lg";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
+  theme?: ButtonTheme;
   size?: ButtonSize;
   fullWidth?: boolean;
 }
 
-const variantStyles: Record<ButtonVariant, string> = {
-  primary:
-    "bg-primary hover:bg-primary-hover text-foreground shadow-lg shadow-primary/30",
-  secondary:
-    "bg-bg-elevated border border-border hover:border-primary/50 text-foreground",
-  outline:
-    "border-2 border-primary text-primary hover:bg-primary-muted bg-transparent",
-};
+const base =
+  "inline-flex items-center justify-center font-medium transition-all duration-200 ease-out focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-95";
+
+/* ================= SIZE ================= */
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "text-sm px-3 py-1.5 rounded-lg",
-  md: "text-sm px-4 py-2.5 rounded-xl",
-  lg: "text-base px-6 py-3 rounded-xl",
+  sm: "h-7 px-3 text-[12px] rounded-[20px]",
+  md: "h-10 px-4 text-[17px] rounded-[10px]",
+  lg: "h-12 px-6 text-[18px] rounded-[5px]",
+};
+
+/* ================= COLORS ================= */
+
+const styles = {
+  dark: {
+    primary:
+      "bg-[hsl(var(--btn-primary-bg))] text-[hsl(var(--btn-primary-text))] hover:bg-[hsl(var(--btn-primary-bg)/0.85)] hover:shadow-md",
+    secondary:
+      "bg-[hsl(var(--btn-secondary-bg))] text-[hsl(var(--btn-secondary-text))] hover:bg-[hsl(var(--btn-secondary-bg)/0.75)] hover:shadow-sm",
+  },
+  light: {
+    primary:
+      "bg-[hsl(var(--btn-primary-bg-light))] text-[hsl(var(--btn-primary-text-light))] hover:bg-[hsl(var(--btn-primary-bg-light)/0.80)] hover:shadow-md",
+    secondary:
+      "bg-[hsl(var(--btn-secondary-bg-light))] text-[hsl(var(--btn-secondary-text-light))] hover:bg-[hsl(var(--btn-secondary-bg-light)/0.75)] hover:shadow-sm",
+  },
 };
 
 export default function Button({
   variant = "primary",
+  theme = "dark",
   size = "md",
   fullWidth = false,
   className = "",
-  disabled,
   children,
   ...props
 }: ButtonProps) {
   return (
     <button
       className={`
-        font-semibold transition-all duration-200
-        focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-bg-elevated
-        disabled:opacity-60 disabled:cursor-not-allowed
-        ${variantStyles[variant]}
+        ${base}
         ${sizeStyles[size]}
-        ${fullWidth ? "w-full flex items-center justify-center" : ""}
+        ${styles[theme][variant]}
+        ${fullWidth ? "w-full" : "w-fit"}
         ${className}
-      `.trim().replace(/\s+/g, " ")}
-      disabled={disabled}
+      `.trim()}
       {...props}
     >
       {children}
