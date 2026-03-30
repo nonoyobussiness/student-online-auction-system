@@ -38,7 +38,6 @@ const styles = {
       "bg-[hsl(var(--btn-secondary-bg-light))] text-[hsl(var(--btn-secondary-text-light))] hover:bg-[hsl(var(--btn-secondary-bg-light)/0.75)] hover:shadow-sm",
   },
 };
-
 export default function Button({
   variant = "primary",
   theme = "dark",

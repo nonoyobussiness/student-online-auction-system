@@ -2,7 +2,7 @@ import Button from "./Button";
 
 export default function ButtonPreview() {
   return (
-    <div className="min-h-screen bg-bg p-8 space-y-10">
+    <div className="min-h-screen bg-[hsl(var(--color-bg))] p-8 space-y-10">
       
       {/* ================= PRIMARY (DARK) ================= */}
       <Section title="Primary (Dark)">
