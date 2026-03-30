@@ -53,38 +53,24 @@
    ============================================ */
 
 @layer base {
+  body {
+    @apply antialiased;
+    background-color: hsl(var(--color-bg));
+    color: hsl(var(--color-foreground));
+  }
   :root {
-    /* BACKGROUND */
-    --bg: 210 40% 7%;
-    --bg-elevated: 210 30% 12%;
-    --bg-card: 210 25% 18%;
+  --btn-primary-bg: 182 54% 32%;
+  --btn-primary-text: 210 30% 12%;
 
-    /* TEXT */
-    --foreground: 50 20% 91%;
-    --muted: 0 0% 60%;
+  --btn-secondary-bg: 50 20% 91%;
+  --btn-secondary-text: 182 54% 32%;
 
-    /* BORDER */
-    --border: 50 20% 91% / 0.12;
+  --btn-primary-bg-light: 180 100% 25%;
+  --btn-primary-text-light: 50 20% 91%;
 
-    /* BUTTON */
-    --btn-primary-bg: var(--primary);
-    --btn-primary-text: var(--gray-800);
-
-    /* STATUS */
-    --status-live: var(--live);
-    --status-success: var(--success);
-  }
-
-  .light {
-    --bg: 50 20% 91%;
-    --bg-card: 0 0% 100%;
-
-    --foreground: 210 30% 12%;
-    --border: 0 0% 85%;
-
-    --btn-primary-bg: 180 100% 25%;
-    --btn-primary-text: 50 20% 91%;
-  }
+  --btn-secondary-bg-light: 210 30% 12%;
+  --btn-secondary-text-light: 182 54% 32%;
+}
 }
 
 /* ============================================
