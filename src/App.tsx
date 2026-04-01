@@ -1,3 +1,4 @@
+import CardPreview from "./pages/CardPreview";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -21,6 +22,7 @@ export default function App() {
           <Home/>
         }
       />
+      <Route path="/card-preview" element={<CardPreview />} />
       <Route path="/buttons" element={<ButtonPreview />} />
       <Route path="/badges" element={<BadgePreview />} />
       <Route path="/inputandtag" element={<InputAndTagPreview />} />
