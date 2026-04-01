@@ -30,17 +30,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const themeStyles: Record<InputTheme, string> = {
       light: [
-        "bg-[#ECEBE4] border-2 border-[#20B2B2]",
-        "text-[#131B23] text-left placeholder:text-[#131B23]/60",
-        "shadow-[0_0_0_1px_rgba(32,178,178,1),0_8px_18px_rgba(32,178,178,0.22)]",
-        "focus:bg-[#ECEBE4] focus:border-[#20B2B2] focus:ring-2 focus:ring-[#20B2B2]/35",
-        "disabled:bg-[#ECEBE4]/70 disabled:border-[#20B2B2]/55 disabled:text-[#131B23]/60 disabled:shadow-none",
+        "ui-input-light",
       ].join(" "),
       dark: [
-        "bg-[#132023] border-2 border-[#20B2B2]",
-        "text-foreground text-left placeholder:text-subtle",
-        "focus:bg-[#1a2d31] focus:border-[#2ec4c4] focus:ring-2 focus:ring-[#20B2B2]/30",
-        "disabled:bg-[#132023]/40 disabled:border-[#20B2B2]/40",
+        "ui-input-dark",
       ].join(" "),
     };
 
@@ -58,9 +51,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           id={inputId}
           aria-label={ariaLabel}
-          style={{ fontFamily: "DM Sans, sans-serif" }}
           className={`
-            w-full text-sm rounded-xl px-4 py-2.5 font-normal
+            ui-input w-full text-sm rounded-xl px-4 py-2.5 font-normal
             outline-none transition-all duration-200
             ${themeStyles[theme]}
             focus:outline-none

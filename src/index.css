@@ -84,6 +84,58 @@
   .text-subtle {
     color: hsl(var(--color-subtle));
   }
+
+  .ui-input {
+    font-family: "DM Sans", sans-serif;
+  }
+
+  .ui-input-light {
+    @apply bg-[#ECEBE4] border-2 border-[#20B2B2] text-[#131B23] text-left placeholder:text-[#131B23]/60;
+    @apply focus:bg-[#ECEBE4] focus:border-[#20B2B2] focus:ring-2 focus:ring-[#20B2B2]/35;
+    @apply disabled:bg-[#ECEBE4]/70 disabled:border-[#20B2B2]/55 disabled:text-[#131B23]/60 disabled:shadow-none;
+    box-shadow: 0 0 0 1px rgba(32, 178, 178, 1), 0 8px 18px rgba(32, 178, 178, 0.22);
+  }
+
+  .ui-input-dark {
+    @apply bg-[#132023] border-2 border-[#20B2B2] text-foreground text-left placeholder:text-subtle;
+    @apply focus:bg-[#1a2d31] focus:border-[#2ec4c4] focus:ring-2 focus:ring-[#20B2B2]/30;
+    @apply disabled:bg-[#132023]/40 disabled:border-[#20B2B2]/40;
+  }
+
+  .ui-tag {
+    @apply inline-flex items-center justify-center px-3 py-1 rounded-full text-sm font-normal text-center;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  .tag-dark-main {
+    background: rgba(32, 178, 178, 1);
+    color: #131b23;
+  }
+  .tag-dark-normal {
+    background: rgba(53, 126, 126, 0.17);
+    color: #ffffff;
+  }
+  .tag-light-main {
+    background: rgba(32, 178, 178, 1);
+    color: #ffffff;
+  }
+  .tag-light-normal {
+    background: rgba(53, 126, 126, 0.17);
+    color: #131b23;
+  }
+
+  .tag-dark-main-hover:hover {
+    background: rgba(86, 224, 224, 1);
+  }
+  .tag-dark-normal-hover:hover {
+    background: rgba(53, 126, 126, 0.5);
+  }
+  .tag-light-main-hover:hover {
+    background: rgba(45, 148, 148, 1);
+  }
+  .tag-light-normal-hover:hover {
+    background: rgba(53, 126, 126, 0.33);
+  }
 }
 
 /* ============================================

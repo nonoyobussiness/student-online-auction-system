@@ -4,6 +4,8 @@ import Tag from "../components/ui/Tag";
 
 const Playground: React.FC = () => {
   const demoCategories = ["Electronics", "Books", "Art"];
+  const [darkTopSelected, setDarkTopSelected] = useState<string | null>(null);
+  const [lightTopSelected, setLightTopSelected] = useState<string | null>(null);
   const [toggleSelected, setToggleSelected] = useState<string | null>(
     demoCategories[0],
   );
@@ -48,27 +50,91 @@ const Playground: React.FC = () => {
       <div>
         <h2 className="text-xl font-semibold mb-2">Tag Component</h2>
         <h3 className="text-lg font-semibold mb-2">Dark Theme</h3>
-        <Tag theme="dark" variant="main">
-          Dark Main 1
-        </Tag>
-        <Tag theme="dark" variant="main" className="ml-2">
-          Dark Main 2
-        </Tag>
-        <Tag theme="dark" variant="normal" className="ml-2">
-          Dark Normal 1
-        </Tag>
+        <p className="text-sm text-muted mb-2">
+          Click any tag to toggle active style.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Tag
+            theme="dark"
+            variant="main"
+            active={darkTopSelected === "dark-main-1"}
+            onClick={() =>
+              setDarkTopSelected(
+                darkTopSelected === "dark-main-1" ? null : "dark-main-1",
+              )
+            }
+          >
+            Dark Main 1
+          </Tag>
+          <Tag
+            theme="dark"
+            variant="main"
+            active={darkTopSelected === "dark-main-2"}
+            onClick={() =>
+              setDarkTopSelected(
+                darkTopSelected === "dark-main-2" ? null : "dark-main-2",
+              )
+            }
+          >
+            Dark Main 2
+          </Tag>
+          <Tag
+            theme="dark"
+            variant="normal"
+            active={darkTopSelected === "dark-normal-1"}
+            onClick={() =>
+              setDarkTopSelected(
+                darkTopSelected === "dark-normal-1" ? null : "dark-normal-1",
+              )
+            }
+          >
+            Dark Normal 1
+          </Tag>
+        </div>
 
         <h3 className="text-lg font-semibold mt-4 mb-2">Light Theme</h3>
+        <p className="text-sm text-muted mb-2">
+          Click any tag to toggle active style.
+        </p>
         <div className="bg-white rounded-xl p-4 shadow-sm inline-block">
-          <Tag theme="light" variant="main">
-            Light Main 1
-          </Tag>
-          <Tag theme="light" variant="main" className="ml-2">
-            Light Main 2
-          </Tag>
-          <Tag theme="light" variant="normal" className="ml-2">
-            Light Normal 1
-          </Tag>
+          <div className="flex flex-wrap gap-2">
+            <Tag
+              theme="light"
+              variant="main"
+              active={lightTopSelected === "light-main-1"}
+              onClick={() =>
+                setLightTopSelected(
+                  lightTopSelected === "light-main-1" ? null : "light-main-1",
+                )
+              }
+            >
+              Light Main 1
+            </Tag>
+            <Tag
+              theme="light"
+              variant="main"
+              active={lightTopSelected === "light-main-2"}
+              onClick={() =>
+                setLightTopSelected(
+                  lightTopSelected === "light-main-2" ? null : "light-main-2",
+                )
+              }
+            >
+              Light Main 2
+            </Tag>
+            <Tag
+              theme="light"
+              variant="normal"
+              active={lightTopSelected === "light-normal-1"}
+              onClick={() =>
+                setLightTopSelected(
+                  lightTopSelected === "light-normal-1" ? null : "light-normal-1",
+                )
+              }
+            >
+              Light Normal 1
+            </Tag>
+          </div>
         </div>
 
         <h3 className="text-lg font-semibold mt-6 mb-2">

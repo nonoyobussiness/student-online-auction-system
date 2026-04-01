@@ -9,6 +9,7 @@
  * Use for: category filters, labels, keywords
  */
 
+import { useState } from "react";
 import type { ReactNode } from "react";
 
 type TagVariant = "main" | "normal";
@@ -30,7 +31,7 @@ export interface TagProps {
 
 export default function Tag({
   children,
-  active = false,
+  active,
   variant = "normal",
   theme = "dark",
   onClick,
@@ -38,68 +39,75 @@ export default function Tag({
   ariaLabel,
 }: TagProps) {
   const isClickable = !!onClick;
+  const isControlled = typeof active === "boolean";
+  const [internalActive, setInternalActive] = useState(false);
+  const isActive = isControlled ? active : internalActive;
 
-  const variantStyles: Record<TagTheme, Record<TagVariant, string>> = {
+  const normalStyles: Record<TagTheme, Record<TagVariant, string>> = {
     dark: {
-      main: "bg-[rgba(32,178,178,1)] text-[#131B23]",
-      normal: "bg-[rgba(53,126,126,0.17)] text-[#FFFFFF]",
+      main: "tag-dark-main",
+      normal: "tag-dark-normal",
     },
     light: {
-      main: "bg-[rgba(32,178,178,1)] text-[#FFFFFF]",
-      normal: "bg-[rgba(53,126,126,0.17)] text-[#131B23]",
+      main: "tag-light-main",
+      normal: "tag-light-normal",
     },
   };
 
   const hoverStyles: Record<TagTheme, Record<TagVariant, string>> = {
     dark: {
-      main: "hover:bg-[rgba(86,224,224,1)]",
-      normal: "hover:bg-[rgba(53,126,126,0.5)]",
+      main: "tag-dark-main-hover",
+      normal: "tag-dark-normal-hover",
     },
     light: {
-      main: "hover:bg-[rgba(45,148,148,1)]",
-      normal: "hover:bg-[rgba(53,126,126,0.33)]",
+      main: "tag-light-main-hover",
+      normal: "tag-light-normal-hover",
     },
   };
 
   const activeStyles: Record<TagTheme, Record<TagVariant, string>> = {
     dark: {
       main: "bg-[rgba(108,238,238,1)] text-[#131B23]",
-      normal: "bg-[rgba(53,126,126,0.65)] text-[#FFFFFF]",
+      normal: "bg-[rgba(108,238,238,1)] text-[#131B23]",
     },
     light: {
-      main: "bg-[rgba(28,116,116,1)] text-[#FFFFFF]",
-      normal: "bg-[rgba(53,126,126,0.5)] text-[#131B23]",
+      main: "bg-[rgba(32,178,178,1)] text-[#FFFFFF]",
+      normal: "bg-[rgba(32,178,178,1)] text-[#FFFFFF]",
     },
   };
 
   const baseStyles = [
-    "inline-flex items-center justify-center px-3 py-1 rounded-full text-sm font-normal text-center",
+    "ui-tag",
     "transition-colors duration-200",
     "border-0",
-    active ? activeStyles[theme][variant] : variantStyles[theme][variant],
-    active ? "" : hoverStyles[theme][variant],
+    isActive ? activeStyles[theme][variant] : normalStyles[theme][variant],
+    isActive ? "" : hoverStyles[theme][variant],
     isClickable ? "cursor-pointer" : "",
-    active ? "opacity-100" : "",
+    isActive ? "opacity-100" : "",
     className,
   ]
     .filter(Boolean)
     .join(" ");
 
+  const handleClick = () => {
+    if (!onClick) return;
+    if (!isControlled) setInternalActive((prev) => !prev);
+    onClick();
+  };
+
   if (isClickable) {
     return (
       <button
         type="button"
-        onClick={onClick}
+        onClick={handleClick}
         className={baseStyles}
         aria-label={ariaLabel}
-        tabIndex={0}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            onClick();
+            handleClick();
           }
         }}
-        style={{ outline: "none", fontFamily: '"DM Sans", sans-serif' }}
       >
         {children}
       </button>
@@ -110,7 +118,6 @@ export default function Tag({
     <span
       className={baseStyles}
       aria-label={ariaLabel}
-      style={{ fontFamily: '"DM Sans", sans-serif' }}
     >
       {children}
     </span>
