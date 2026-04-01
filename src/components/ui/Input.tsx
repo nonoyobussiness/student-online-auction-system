@@ -14,14 +14,28 @@
 import { forwardRef } from "react";
 import type { InputHTMLAttributes } from "react";
 
+type InputTheme = "light" | "dark";
+
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
+  ariaLabel?: string; // Custom aria-label for accessibility
+  theme?: InputTheme;
 }
 
+
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, className = "", id, ...props }, ref) => {
+  ({ label, error, className = "", id, ariaLabel, theme = "dark", ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s/g, "-");
+
+    const themeStyles: Record<InputTheme, string> = {
+      light: [
+        "ui-input-light",
+      ].join(" "),
+      dark: [
+        "ui-input-dark",
+      ].join(" "),
+    };
 
     return (
       <div className="flex flex-col gap-1.5">
@@ -36,16 +50,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           id={inputId}
+          aria-label={ariaLabel}
           className={`
-            w-full text-sm rounded-xl px-4 py-2.5
-            bg-bg-card border border-border
-            text-foreground placeholder:text-subtle
-            outline-none transition
-            focus:border-primary focus:ring-2 focus:ring-primary/20
-            disabled:opacity-50 disabled:cursor-not-allowed
+            ui-input w-full text-sm rounded-xl px-4 py-2.5 font-normal
+            outline-none transition-all duration-200
+            ${themeStyles[theme]}
+            focus:outline-none
+            disabled:cursor-not-allowed
             ${error ? "border-red-500 focus:border-red-500" : ""}
             ${className}
           `.trim().replace(/\s+/g, " ")}
+          tabIndex={0}
           {...props}
         />
         {error && (
