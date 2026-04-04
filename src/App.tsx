@@ -5,6 +5,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import AuctionCardPreview from "./components/sections/AuctionCardPreview";
 import { LiveBidsPreview } from "./components/sections";
+import CardPreview from "./pages/CardPreview";
+import InputAndTagPreview from "./pages/InputAndTagPreview";
+import ButtonPreview from "./components/ui/ButtonPreview";
+import BadgePreview from "./components/ui/BadgePreview";
 
 
 export default function App() {
@@ -25,6 +29,11 @@ export default function App() {
       />
       <Route path="/livebids" element={<LiveBidsPreview/>}/>
       <Route path="/auctioncard" element={<AuctionCardPreview/>}/>
+
+      <Route path="/card-preview" element={<CardPreview />} />
+      <Route path="/buttons" element={<ButtonPreview />} />
+      <Route path="/badges" element={<BadgePreview />} />
+      <Route path="/inputandtag" element={<InputAndTagPreview />} />
       
     </Routes>
   );
