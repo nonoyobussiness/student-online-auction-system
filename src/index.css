@@ -52,6 +52,18 @@
     Consolas, monospace;
   --font-dm-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-encode-sans-sc: "Encode Sans SC", ui-sans-serif, system-ui, sans-serif;
+
+  /* ========== LIVE BIDS / AUCTION TILE (exact hex — reuse across previews) ========== */
+  --color-live-bids-page: #0b1e23;
+  --color-live-bid-tile-dark: #0f2a30;
+  --color-live-bid-tile-dark-border: #1f3a40;
+  --color-live-bid-tile-light: #cfcfcf;
+  --color-live-bid-tile-light-border: #b5b5b5;
+  --color-live-bid-image-placeholder: #7f7f7f;
+  --color-accent-bid-dark: #20b2b2;
+  --color-accent-bid-light: #357e7e;
+  --color-accent-bid-dark-hover: #1a9a9a;
+  --color-live-bid-button-light-bg: #e6e6e6;
 }
 
 /* ============================================
@@ -89,6 +101,25 @@
 
   .text-subtle {
     color: hsl(var(--color-subtle));
+  }
+
+  /* Live indicator dot (non-Tailwind ring + inset glow) */
+  .live-bids-status-dot {
+    @apply inline-block shrink-0 rounded-full;
+    width: 17px;
+    height: 17px;
+    background-color: hsl(var(--color-live));
+    box-shadow:
+      0 0 0 1px rgba(7, 7, 7, 0.2),
+      inset 0 0 0 3px rgba(180, 0, 0, 0.45);
+  }
+
+  .live-bids-status-dot--sm {
+    width: 12px;
+    height: 12px;
+    box-shadow:
+      0 0 0 1px rgba(7, 7, 7, 0.2),
+      inset 0 0 0 2px rgba(180, 0, 0, 0.45);
   }
 }
 

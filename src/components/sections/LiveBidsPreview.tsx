@@ -5,6 +5,45 @@ import LiveBids, {
   LiveBidsMobile,
 } from "./LiveBids";
 
+const previewControlBar =
+  "flex rounded-lg border border-white/20 bg-live-bids-page/90 p-1 shadow-lg backdrop-blur-sm";
+
+const inactiveToggle = "text-white/70 hover:text-white";
+const activeToggleDefault = "bg-white/15 text-white";
+
+function SegmentedToggle<T extends string>({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  value: T;
+  onChange: (v: T) => void;
+  options: readonly { id: T; label: string; activeClass: string }[];
+}) {
+  return (
+    <div className={previewControlBar} role="group" aria-label={label}>
+      {options.map((opt) => {
+        const active = value === opt.id;
+        return (
+          <button
+            key={opt.id}
+            type="button"
+            onClick={() => onChange(opt.id)}
+            aria-pressed={active}
+            className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
+              active ? opt.activeClass : inactiveToggle
+            }`}
+          >
+            {opt.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function LiveBidsPreview() {
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -24,67 +63,28 @@ export default function LiveBidsPreview() {
         className="fixed right-4 top-4 z-50 flex flex-col gap-2 sm:flex-row sm:items-start"
         role="presentation"
       >
-        <div
-          className="flex rounded-lg border border-white/20 bg-[#0b1e23]/90 p-1 shadow-lg backdrop-blur-sm"
-          role="group"
-          aria-label="Preview device size"
-        >
-          <button
-            type="button"
-            onClick={() => setDevice("desktop")}
-            aria-pressed={device === "desktop"}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
-              device === "desktop"
-                ? "bg-white/15 text-white"
-                : "text-white/70 hover:text-white"
-            }`}
-          >
-            Desktop
-          </button>
-          <button
-            type="button"
-            onClick={() => setDevice("mobile")}
-            aria-pressed={device === "mobile"}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
-              device === "mobile"
-                ? "bg-white/15 text-white"
-                : "text-white/70 hover:text-white"
-            }`}
-          >
-            Mobile
-          </button>
-        </div>
-
-        <div
-          className="flex rounded-lg border border-white/20 bg-[#0b1e23]/90 p-1 shadow-lg backdrop-blur-sm"
-          role="group"
-          aria-label="Preview theme"
-        >
-          <button
-            type="button"
-            onClick={() => setTheme("dark")}
-            aria-pressed={theme === "dark"}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
-              theme === "dark"
-                ? "bg-white/15 text-white"
-                : "text-white/70 hover:text-white"
-            }`}
-          >
-            Dark
-          </button>
-          <button
-            type="button"
-            onClick={() => setTheme("light")}
-            aria-pressed={theme === "light"}
-            className={`rounded-md px-3 py-1.5 text-sm font-medium transition ${
-              theme === "light"
-                ? "bg-white text-gray-900"
-                : "text-white/70 hover:text-white"
-            }`}
-          >
-            Light
-          </button>
-        </div>
+        <SegmentedToggle
+          label="Preview device size"
+          value={device}
+          onChange={setDevice}
+          options={[
+            { id: "desktop", label: "Desktop", activeClass: activeToggleDefault },
+            { id: "mobile", label: "Mobile", activeClass: activeToggleDefault },
+          ]}
+        />
+        <SegmentedToggle
+          label="Preview theme"
+          value={theme}
+          onChange={setTheme}
+          options={[
+            { id: "dark", label: "Dark", activeClass: activeToggleDefault },
+            {
+              id: "light",
+              label: "Light",
+              activeClass: "bg-white text-gray-900",
+            },
+          ]}
+        />
       </div>
 
       <View />

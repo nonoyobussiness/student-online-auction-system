@@ -35,8 +35,8 @@ export default function AuctionCard({ auction }: AuctionCardProps) {
       </div>
 
       <div className="p-4">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="font-jetbrains-mono text-sm bg-gray-100 px-2 py-1 rounded">
+        <div className="mb-2 flex items-center gap-2">
+          <span className="rounded bg-bg-elevated px-2 py-1 font-jetbrains-mono text-sm text-foreground">
             {typeof auction.endsAt === "string"
               ? auction.endsAt
               : "Ending soon"}

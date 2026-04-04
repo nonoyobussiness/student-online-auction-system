@@ -4,6 +4,7 @@ import Register from "./components/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import AuctionCardPreview from "./components/sections/AuctionCardPreview";
+import { LiveBidsPreview } from "./components/sections";
 
 
 export default function App() {
@@ -19,9 +20,11 @@ export default function App() {
             <Home />
           </ProtectedRoute> 
           <Home/> */
-        <AuctionCardPreview />
+        <Home />
         }
       />
+      <Route path="/livebids" element={<LiveBidsPreview/>}/>
+      <Route path="/auctioncard" element={<AuctionCardPreview/>}/>
       
     </Routes>
   );
