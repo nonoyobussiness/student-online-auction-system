@@ -1,3 +1,4 @@
+Home.tsx
 /**
  * Home - Main UniAuction homepage
  * Assembles all sections into the full layout.
