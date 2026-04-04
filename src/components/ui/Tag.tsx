@@ -26,15 +26,7 @@ export interface TagProps {
   /** Makes tag clickable */
   onClick?: () => void;
   className?: string;
-  ariaLabel?: string;
-  /** Custom active background color */
-  lightThemeActiveBg?: string;
-  /** Custom active text color */
-  lightThemeActiveText?: string;
-  /** Custom inactive background color */
-  lightThemeInactiveBg?: string;
-  /** Custom inactive text color */
-  lightThemeInactiveText?: string;
+  ariaLabel?: string; // Custom aria-label for accessibility
 }
 
 export default function Tag({
@@ -45,10 +37,6 @@ export default function Tag({
   onClick,
   className = "",
   ariaLabel,
-  lightThemeActiveBg,
-  lightThemeActiveText,
-  lightThemeInactiveBg,
-  lightThemeInactiveText,
 }: TagProps) {
   const isClickable = !!onClick;
   const isControlled = typeof active === "boolean";
@@ -61,8 +49,8 @@ export default function Tag({
       normal: "tag-dark-normal",
     },
     light: {
-      main: lightThemeActiveBg ? `bg-[${lightThemeActiveBg}]` : "tag-light-main",
-      normal: lightThemeInactiveBg ? `bg-[${lightThemeInactiveBg}] text-[${lightThemeInactiveText}]` : "tag-light-normal",
+      main: "tag-light-main",
+      normal: "tag-light-normal",
     },
   };
 
@@ -73,7 +61,7 @@ export default function Tag({
     },
     light: {
       main: "tag-light-main-hover",
-      normal: lightThemeInactiveBg ? `bg-[${lightThemeInactiveBg}] opacity-80` : "tag-light-normal-hover",
+      normal: "tag-light-normal-hover",
     },
   };
 
@@ -83,12 +71,8 @@ export default function Tag({
       normal: "bg-[rgba(108,238,238,1)] text-[#131B23]",
     },
     light: {
-      main: lightThemeActiveBg && lightThemeActiveText 
-        ? `bg-[${lightThemeActiveBg}] text-[${lightThemeActiveText}]` 
-        : "bg-[rgba(32,178,178,1)] text-[#FFFFFF]",
-      normal: lightThemeActiveBg && lightThemeActiveText 
-        ? `bg-[${lightThemeActiveBg}] text-[${lightThemeActiveText}]` 
-        : "bg-[rgba(32,178,178,1)] text-[#FFFFFF]",
+      main: "bg-[rgba(32,178,178,1)] text-[#FFFFFF]",
+      normal: "bg-[rgba(32,178,178,1)] text-[#FFFFFF]",
     },
   };
 
