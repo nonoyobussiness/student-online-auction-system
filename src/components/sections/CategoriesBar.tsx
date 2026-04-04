@@ -61,6 +61,7 @@ export default function CategoriesBar({ theme = "dark" }: CategoriesBarProps) {
           onClick={() => handleCategoryClick(null)}
           theme={theme}
           variant="normal"
+          className="rounded-full px-4 py-1.5"
         >
           All Bids
         </Tag>
@@ -71,6 +72,7 @@ export default function CategoriesBar({ theme = "dark" }: CategoriesBarProps) {
             onClick={() => handleCategoryClick(cat.slug)}
             theme={theme}
             variant="normal"
+            className="rounded-full px-4 py-1.5"
           >
             {cat.name}
           </Tag>
