@@ -1,39 +1,43 @@
 /**
- * HeroSection - Main landing banner for the homepage
- * Displays the headline and primary call-to-action.
+ * HeroSection - Updated with theme + responsive (clean version)
  */
 
-import { Button } from "../ui";
+type HeroSectionProps = {
+  theme?: "dark" | "light";
+};
 
-export default function HeroSection() {
+export default function HeroSection({ theme = "dark" }: HeroSectionProps) {
+  const isDark = theme === "dark";
+
   return (
-    <section
-      className="relative overflow-hidden rounded-2xl bg-bg-elevated border border-border"
-      aria-label="Welcome to UniAuction"
-    >
-      {/* Decorative background glow */}
-      <div
-        className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-primary/20 blur-3xl pointer-events-none"
-        aria-hidden
-      />
+    <section className="px-4 sm:px-6 md:px-12 py-6 md:py-8">
+      <div className="max-w-6xl mx-auto">
 
-      <div className="relative z-10 px-6 py-16 sm:px-12 sm:py-20 md:py-24">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-foreground max-w-2xl">
-          Buy & sell on campus.{" "}
-          <span className="text-primary">Student to student.</span>
+        {/* Heading */}
+        <h1
+          className={`
+            font-bold
+            text-2xl sm:text-3xl md:text-4xl lg:text-5xl
+            ${isDark ? "text-white" : "text-gray-900"}
+          `}
+        >
+          <span className="text-[#14b8a6] font-bold">
+            Buy. Sell. Bid.
+          </span>{" "}
+          Discover Campus Auctions.
         </h1>
-        <p className="mt-4 text-lg text-muted max-w-xl">
-          UniAuction is your campus marketplace. List items, place bids, and find
-          great deals from fellow students.
+
+        {/* Subtitle */}
+        <p
+          className={`
+            mt-2 max-w-2xl
+            text-sm sm:text-base md:text-lg
+            ${isDark ? "text-gray-300" : "text-gray-600"}
+          `}
+        >
+          The exclusive student marketplace for safe, fast and local campus bidding.
         </p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Button variant="primary" size="lg">
-            Browse Auctions
-          </Button>
-          <Button variant="outline" size="lg">
-            How it works
-          </Button>
-        </div>
+
       </div>
     </section>
   );
