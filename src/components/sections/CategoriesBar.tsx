@@ -60,10 +60,7 @@ export default function CategoriesBar({ theme = "dark" }: CategoriesBarProps) {
           active={activeCategory === null}
           onClick={() => handleCategoryClick(null)}
           theme={theme}
-          lightThemeActiveBg="#008080"
-          lightThemeActiveText="#FFFFFF"
-          lightThemeInactiveBg="#ECEBE4"
-          lightThemeInactiveText="#131B23"
+          variant="normal"
         >
           All Bids
         </Tag>
@@ -73,10 +70,7 @@ export default function CategoriesBar({ theme = "dark" }: CategoriesBarProps) {
             active={activeCategory === cat.slug}
             onClick={() => handleCategoryClick(cat.slug)}
             theme={theme}
-            lightThemeActiveBg="#008080"
-            lightThemeActiveText="#FFFFFF"
-            lightThemeInactiveBg="#ECEBE4"
-            lightThemeInactiveText="#131B23"
+            variant="normal"
           >
             {cat.name}
           </Tag>
