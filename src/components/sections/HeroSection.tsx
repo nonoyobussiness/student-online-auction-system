@@ -1,9 +1,6 @@
 /**
- * HeroSection - Updated with theme + responsive (no layout changes)
+ * HeroSection - Updated with theme + responsive (clean version)
  */
-
-import { Button } from "../ui";
-import { Filter } from "lucide-react";
 
 type HeroSectionProps = {
   theme?: "dark" | "light";
@@ -40,33 +37,6 @@ export default function HeroSection({ theme = "dark" }: HeroSectionProps) {
         >
           The exclusive student marketplace for safe, fast and local campus bidding.
         </p>
-
-        {/* Buttons */}
-        <div className="flex flex-wrap gap-3 mt-4 justify-center md:justify-end">
-
-          {/* Filter Button */}
-          <Button
-            className="
-              flex items-center gap-2
-              !bg-[#14b8a6] !text-white !border-none
-              hover:!bg-[#0d9488] shadow-sm
-            "
-          >
-            <Filter size={16} />
-            Filter
-          </Button>
-
-          {/* Sort Button */}
-          <Button
-            className="
-              !bg-[#14b8a6] !text-white !border-none
-              hover:!bg-[#0d9488] shadow-sm
-            "
-          >
-            Sort: Ending Soon
-          </Button>
-
-        </div>
 
       </div>
     </section>

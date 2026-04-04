@@ -71,17 +71,17 @@ export default function PromoBanner({ theme = "dark" }: PromoBannerProps) {
               {/* FEATURES */}
               <div className="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6 mt-5 text-sm">
 
-                <div className={`flex items-center gap-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+                <div className={`flex items-center gap-2 ${isDark ? "text-gray-300" : "text-gray-900"}`}>
                   <BadgeCheck size={18} className="text-teal-500" />
                   <span>Verified Student IDs</span>
                 </div>
 
-                <div className={`flex items-center gap-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+                <div className={`flex items-center gap-2 ${isDark ? "text-gray-300" : "text-gray-900"}`}>
                   <Wallet size={18} className="text-teal-500" />
                   <span>Instant Payouts</span>
                 </div>
 
-                <div className={`flex items-center gap-2 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
+                <div className={`flex items-center gap-2 ${isDark ? "text-gray-300" : "text-gray-900"}`}>
                   <Gavel size={18} className="text-teal-500" />
                   <span>Zero Listing Fees</span>
                 </div>
@@ -110,15 +110,25 @@ export default function PromoBanner({ theme = "dark" }: PromoBannerProps) {
                   : "bg-[#c7ddda] border-teal-500/20"}   
               `}
             >
-              <Box size={24} className="mb-2 text-teal-500" />
 
-              <h4 className={`${isDark ? "text-white" : "text-gray-900"} font-semibold text-sm`}>
+              {/* ICON BOX */}
+              <div
+                className={`
+                  w-10 h-10 flex items-center justify-center rounded-xl mb-3
+                  ${isDark ? "bg-teal-400/10" : "bg-teal-600/20"}
+                `}
+              >
+                <Box size={20} className="text-teal-500" />
+              </div>
+
+              <h4 className={`font-semibold text-sm ${isDark ? "text-gray-300" : "text-gray-900"}`}>
                 Snap, List, Sell
               </h4>
 
-              <p className="text-gray-400 text-xs mt-2 px-3">
+              <p className="text-gray-700 text-xs mt-2 px-3">
                 It takes less than 2 minutes to create your first auction
               </p>
+
             </div>
 
           </div>
