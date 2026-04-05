@@ -30,7 +30,7 @@ export default function HeroSection() {
           <Button variant="primary" size="lg">
             Browse Auctions
           </Button>
-          <Button variant="outline" size="lg">
+          <Button variant="secondary" size="lg">
             How it works
           </Button>
         </div>
