@@ -162,7 +162,7 @@ const NotificationBadge: React.FC<{
 const LiveBidsBadge: React.FC<{
   size?: BadgeSize;
   className?: string;
-}> = ({ size = "desktop", className = "" }) => (
+}> = ({ className = "" }) => (
   <span
     style={{
       width: 17,

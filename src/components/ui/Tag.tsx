@@ -105,7 +105,7 @@ export default function Tag({
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            handleClick();
+            handleClick();  
           }
         }}
       >

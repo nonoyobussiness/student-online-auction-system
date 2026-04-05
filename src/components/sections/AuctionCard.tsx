@@ -1,6 +1,6 @@
 /**
  * AuctionCard - Card component for a single auction listing
- * Used inside LiveBids section.
+ * Used where a full listing card is needed (separate from the Live Bids grid tiles).
  */
 
 import { Card, Badge } from "../ui";
@@ -15,7 +15,14 @@ export default function AuctionCard({ auction }: AuctionCardProps) {
   return (
     <Card padding="none" onClick={() => {}}>
       {/* Image placeholder */}
-      <div className="aspect-video bg-bg-elevated rounded-t-xl flex items-center justify-center border-b border-border">
+      <div className="relative aspect-video bg-bg-elevated rounded-t-xl flex items-center justify-center border-b border-border">
+        <div className="absolute left-2 top-2 z-10">
+          <Badge
+            variant={auction.isLive ? "live" : "ended"}
+            theme="dark"
+            size="mobile"
+          />
+        </div>
         {auction.imageUrl ? (
           <img
             src={auction.imageUrl}
@@ -28,15 +35,12 @@ export default function AuctionCard({ auction }: AuctionCardProps) {
       </div>
 
       <div className="p-4">
-        <div className="flex items-center gap-2 mb-2">
-          {auction.isLive && (
-            <Badge variant="live">Live</Badge>
-          )}
-          <Badge variant="timer">
+        <div className="mb-2 flex items-center gap-2">
+          <span className="rounded bg-bg-elevated px-2 py-1 font-jetbrains-mono text-sm text-foreground">
             {typeof auction.endsAt === "string"
               ? auction.endsAt
               : "Ending soon"}
-          </Badge>
+          </span>
         </div>
         <h3 className="font-semibold text-foreground line-clamp-1">
           {auction.title}

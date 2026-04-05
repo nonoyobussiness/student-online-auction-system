@@ -2,6 +2,8 @@
  * HeroSection - Updated with theme + responsive (clean version)
  */
 
+import { Button } from "../ui";
+
 type HeroSectionProps = {
   theme?: "dark" | "light";
 };
@@ -38,6 +40,14 @@ export default function HeroSection({ theme = "dark" }: HeroSectionProps) {
           The exclusive student marketplace for safe, fast and local campus bidding.
         </p>
 
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Button variant="primary" size="lg">
+            Browse Auctions
+          </Button>
+          <Button variant="secondary" size="lg">
+            How it works
+          </Button>
+        </div>
       </div>
     </section>
   );
