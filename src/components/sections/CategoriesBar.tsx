@@ -1,83 +1,54 @@
 /**
- * CategoriesBar - Horizontal list of category filters
- * Users can click categories to filter auctions.
+ * CategoriesBar - Category filter tabs matching design
  */
 
 import { useState } from "react";
-import { Tag } from "../ui";
-import { AUCTION_CATEGORIES } from "../../constants";
 
-type ThemeMode = "light" | "dark";
+const CATEGORIES = [
+  { id: "all", label: "All Bids" },
+  { id: "textbooks", label: "Textbooks" },
+  { id: "electronics", label: "Electronics" },
+  { id: "food", label: "Food" },
+  { id: "event-tickets", label: "Event tickets" },
+  { id: "skincare", label: "Skincare" },
+  { id: "transportation", label: "Transportation" },
+  { id: "misc", label: "Misc" },
+];
 
 interface CategoriesBarProps {
-  theme?: ThemeMode;
+  theme?: "dark" | "light";
 }
 
 export default function CategoriesBar({ theme = "dark" }: CategoriesBarProps) {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-
-  const handleCategoryClick = (slug: string | null) => {
-    if (slug === null) {
-      setActiveCategory(null);
-      return;
-    }
-
-    setActiveCategory(activeCategory === slug ? null : slug);
-  };
+  const [active, setActive] = useState("all");
 
   const isDark = theme === "dark";
 
-  const filterSortStyles = isDark
-    ? "bg-[#0C1218] border-[#1F2A36] text-white"
-    : "bg-[#008080] border-[#008080] text-white";
-
   return (
-    <section aria-label="Browse by category">
-      <div className="flex justify-end gap-3 mb-4">
-        <button className={`flex items-center gap-1 px-3 py-1.5 rounded-full border text-base font-medium ${filterSortStyles}`}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-3 w-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
-            />
-          </svg>
-          Filter
-        </button>
-        <button className={`px-3 py-1.5 rounded-full border text-base font-medium ${filterSortStyles}`}>
-          Sort: Ending Soon
-        </button>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        <Tag
-          active={activeCategory === null}
-          onClick={() => handleCategoryClick(null)}
-          theme={theme}
-          variant="normal"
-          className="rounded-full px-4 py-1.5"
-        >
-          All Bids
-        </Tag>
-        {AUCTION_CATEGORIES.map((cat) => (
-          <Tag
+    <div className="flex flex-wrap gap-2 mt-4">
+      {CATEGORIES.map((cat) => {
+        const isActive = active === cat.id;
+        return (
+          <button
             key={cat.id}
-            active={activeCategory === cat.slug}
-            onClick={() => handleCategoryClick(cat.slug)}
-            theme={theme}
-            variant="normal"
-            className="rounded-full px-4 py-1.5"
+            type="button"
+            onClick={() => setActive(cat.id)}
+            className="px-3 py-1 rounded-full text-sm font-normal transition-colors"
+            style={{
+              fontFamily: "DM Sans, sans-serif",
+              backgroundColor: isActive
+                ? isDark ? "#6CEEEE" : "#20B2B2"
+                : isDark ? "rgba(53,126,126,0.17)" : "rgba(53,126,126,0.12)",
+              color: isActive
+                ? isDark ? "#131B23" : "#FFFFFF"
+                : isDark ? "#FFFFFF" : "#131B23",
+              border: "none",
+            }}
           >
-            {cat.name}
-          </Tag>
-        ))}
-      </div>
-    </section>
+            {cat.label}
+          </button>
+        );
+      })}
+    </div>
   );
 }

@@ -1,9 +1,9 @@
 /**
  * Sections - Page section components
- * Each section is a self-contained block for the homepage.
  */
 
 export { default as HeroSection } from "./HeroSection";
+export { default as FilterSortBar } from "./FilterSortBar";
 export { default as CategoriesBar } from "./CategoriesBar";
 export {
   default as LiveBids,
@@ -11,7 +11,8 @@ export {
   LiveBidsLightMobile,
   LiveBidsMobile,
 } from "./LiveBids";
-export { default as LiveBidsPreview } from "./LiveBidsPreview";
+export { default as HomeLiveBids } from "./HomeLiveBids";
 export { default as AuctionCard } from "./AuctionCard";
 export { default as PromoBanner } from "./PromoBanner";
 export { default as HowItWorks } from "./HowItWorks";
+export { default as Pagination } from "./Pagination";

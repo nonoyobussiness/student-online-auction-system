@@ -2,6 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+function getErrorMessage(error: unknown): string {
+    if (error instanceof Error) {
+        return error.message;
+    }
+
+    return "Something went wrong. Please try again.";
+}
+
 export default function RegisterPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -57,8 +65,8 @@ export default function RegisterPage() {
             if (!res.ok) throw new Error(data.message);
             alert("Account created successfully!");
             navigate("/login");
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            setError(getErrorMessage(err));
         } finally {
             setLoading(false);
         }

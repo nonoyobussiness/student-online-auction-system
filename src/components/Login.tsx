@@ -1,7 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+function getErrorMessage(error: unknown): string {
+    if (error instanceof Error) {
+        return error.message;
+    }
+
+    return "Something went wrong. Please try again.";
+}
 
 export default function LoginPage() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -31,9 +40,9 @@ export default function LoginPage() {
             const data = await res.json();
             if (!res.ok) throw new Error(data.message);
             localStorage.setItem("token", data.token);
-            window.location.href = "/home";
-        } catch (err: any) {
-            setError(err.message);
+            navigate("/home", { replace: true });
+        } catch (err: unknown) {
+            setError(getErrorMessage(err));
         } finally {
             setLoading(false);
         }

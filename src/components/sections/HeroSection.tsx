@@ -1,54 +1,25 @@
 /**
- * HeroSection - Updated with theme + responsive (clean version)
+ * HeroSection - Homepage hero matching design exactly
+ * "Buy. Sell. Bid." teal + "Discover Campus Auctions." white
  */
 
-import { Button } from "../ui";
-
-type HeroSectionProps = {
-  theme?: "dark" | "light";
-};
-
-export default function HeroSection({ theme = "dark" }: HeroSectionProps) {
-  const isDark = theme === "dark";
-
+export default function HeroSection() {
   return (
-    <section className="px-4 sm:px-6 md:px-12 py-6 md:py-8">
-      <div className="max-w-6xl mx-auto">
-
-        {/* Heading */}
-        <h1
-          className={`
-            font-bold
-            text-2xl sm:text-3xl md:text-4xl lg:text-5xl
-            ${isDark ? "text-white" : "text-gray-900"}
-          `}
-        >
-          <span className="text-[#14b8a6] font-bold">
-            Buy. Sell. Bid.
-          </span>{" "}
-          Discover Campus Auctions.
-        </h1>
-
-        {/* Subtitle */}
-        <p
-          className={`
-            mt-2 max-w-2xl
-            text-sm sm:text-base md:text-lg
-            ${isDark ? "text-gray-300" : "text-gray-600"}
-          `}
-        >
-          The exclusive student marketplace for safe, fast and local campus bidding.
-        </p>
-
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Button variant="primary" size="lg">
-            Browse Auctions
-          </Button>
-          <Button variant="secondary" size="lg">
-            How it works
-          </Button>
-        </div>
-      </div>
+    <section aria-label="Welcome to UniAuction" className="pt-2">
+      <h1
+        className="text-[38px] font-bold leading-tight tracking-tight"
+        style={{ fontFamily: "DM Sans, sans-serif", color: "#ECEBE4" }}
+      >
+        <span style={{ color: "#6CEEEE" }}>Buy. Sell. Bid.</span>
+        {" "}
+        <span style={{ color: "#ECEBE4" }}>Discover Campus Auctions.</span>
+      </h1>
+      <p
+        className="mt-3 text-sm leading-relaxed max-w-md"
+        style={{ color: "rgba(236,235,228,0.55)", fontFamily: "DM Sans, sans-serif" }}
+      >
+        The exclusive student marketplace for safe, fast and local campus bidding.
+      </p>
     </section>
   );
 }
