@@ -21,11 +21,12 @@ interface CategoriesBarProps {
 
 export default function CategoriesBar({ theme = "dark" }: CategoriesBarProps) {
   const [active, setActive] = useState("all");
-
-  const isDark = theme === "dark";
+  const primary = theme === "dark" ? "#20B2B2" : "#008080";
+  const primaryText = theme === "dark" ? "#131B23" : "#ECEBE4";
+  const foreground = theme === "dark" ? "var(--app-foreground)" : "var(--app-foreground)";
 
   return (
-    <div className="flex flex-wrap gap-2 mt-4">
+    <div className="mt-4 flex overflow-x-auto whitespace-nowrap gap-5 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
       {CATEGORIES.map((cat) => {
         const isActive = active === cat.id;
         return (
@@ -33,16 +34,26 @@ export default function CategoriesBar({ theme = "dark" }: CategoriesBarProps) {
             key={cat.id}
             type="button"
             onClick={() => setActive(cat.id)}
-            className="px-3 py-1 rounded-full text-sm font-normal transition-colors"
+            className="h-9 shrink-0 rounded-full px-5 text-[17px] font-normal transition-all duration-200"
             style={{
               fontFamily: "DM Sans, sans-serif",
               backgroundColor: isActive
-                ? isDark ? "#6CEEEE" : "#20B2B2"
-                : isDark ? "rgba(53,126,126,0.17)" : "rgba(53,126,126,0.12)",
+                ? primary
+                : "var(--app-hover)",
               color: isActive
-                ? isDark ? "#131B23" : "#FFFFFF"
-                : isDark ? "#FFFFFF" : "#131B23",
+                ? primaryText
+                : foreground,
               border: "none",
+            }}
+            onMouseEnter={(event) => {
+              if (!isActive) {
+                event.currentTarget.style.backgroundColor = "var(--app-hover)";
+              }
+            }}
+            onMouseLeave={(event) => {
+              if (!isActive) {
+                event.currentTarget.style.backgroundColor = "var(--app-hover)";
+              }
             }}
           >
             {cat.label}

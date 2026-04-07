@@ -3,16 +3,20 @@
  * Matches design: left text + features + CTA, right "Snap, List, Sell" card
  */
 
+import { BadgeCheck, DollarSign, Tag } from "lucide-react";
+
 interface PromoBannerProps {
   theme?: "dark" | "light";
 }
 
 export default function PromoBanner({ theme = "dark" }: PromoBannerProps) {
   const isDark = theme === "dark";
+  const buttonBg = isDark ? "#20B2B2" : "#008080";
+  const buttonText = isDark ? "#131B23" : "#ECEBE4";
 
   return (
     <section
-      className="rounded-2xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+      className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-6 rounded-2xl px-6 py-8 md:flex-row md:items-center"
       style={{
         backgroundColor: isDark ? "rgba(53,126,126,0.15)" : "rgba(53,126,126,0.1)",
         border: `1px solid ${isDark ? "rgba(53,126,126,0.3)" : "rgba(53,126,126,0.25)"}`,
@@ -36,7 +40,7 @@ export default function PromoBanner({ theme = "dark" }: PromoBannerProps) {
         </div>
 
         <h3
-          className="text-2xl font-bold leading-snug mb-3"
+          className="mb-3 text-[18px] font-bold leading-snug md:text-[34px]"
           style={{
             color: isDark ? "#ECEBE4" : "#131B23",
             fontFamily: "DM Sans, sans-serif",
@@ -54,29 +58,21 @@ export default function PromoBanner({ theme = "dark" }: PromoBannerProps) {
         </p>
 
         {/* Feature pills */}
-        <div className="flex flex-wrap gap-4 mb-6">
+        <div className="mb-6 flex flex-wrap gap-5">
           <div className="flex items-center gap-1.5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20B2B2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-              <polyline points="22 4 12 14.01 9 11.01" />
-            </svg>
+            <BadgeCheck size={14} color="#20B2B2" />
             <span className="text-xs font-medium" style={{ color: isDark ? "rgba(236,235,228,0.7)" : "#444" }}>
               Verified Student IDs
             </span>
           </div>
           <div className="flex items-center gap-1.5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20B2B2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="5" width="20" height="14" rx="2" />
-              <line x1="2" y1="10" x2="22" y2="10" />
-            </svg>
+            <DollarSign size={14} color="#20B2B2" />
             <span className="text-xs font-medium" style={{ color: isDark ? "rgba(236,235,228,0.7)" : "#444" }}>
               Instant Payouts
             </span>
           </div>
           <div className="flex items-center gap-1.5">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#20B2B2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-            </svg>
+            <Tag size={14} color="#20B2B2" />
             <span className="text-xs font-medium" style={{ color: isDark ? "rgba(236,235,228,0.7)" : "#444" }}>
               Zero Listing Fees
             </span>
@@ -85,14 +81,14 @@ export default function PromoBanner({ theme = "dark" }: PromoBannerProps) {
 
         <button
           type="button"
-          className="px-5 py-2.5 rounded-full text-sm font-semibold transition"
+          className="rounded-lg px-5 py-2.5 text-sm font-semibold transition"
           style={{
-            backgroundColor: "#6CEEEE",
-            color: "#131B23",
+            backgroundColor: buttonBg,
+            color: buttonText,
             fontFamily: "DM Sans, sans-serif",
           }}
-          onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#50d8d8")}
-          onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#6CEEEE")}
+          onMouseEnter={e => (e.currentTarget.style.opacity = "0.9")}
+          onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
         >
           Get Started Now
         </button>
@@ -100,7 +96,7 @@ export default function PromoBanner({ theme = "dark" }: PromoBannerProps) {
 
       {/* Right side - Snap, List, Sell card */}
       <div
-        className="flex flex-col items-center justify-center rounded-xl p-5 shrink-0 text-center"
+        className="hidden shrink-0 flex-col items-center justify-center rounded-xl p-5 text-center md:flex"
         style={{
           width: 160,
           minHeight: 120,

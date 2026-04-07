@@ -12,11 +12,13 @@ interface PaginationProps {
 export default function Pagination({ totalPages = 20, theme = "dark" }: PaginationProps) {
   const [current, setCurrent] = useState(1);
   const isDark = theme === "dark";
+  const activeBg = isDark ? "#20B2B2" : "#008080";
+  const activeText = isDark ? "#131B23" : "#ECEBE4";
 
   const pages = [1, 2, 3];
 
   return (
-    <div className="flex items-center justify-center gap-1 mt-8">
+    <div className="mt-8 flex items-center justify-center gap-2">
       {pages.map((page) => {
         const isActive = current === page;
         return (
@@ -24,13 +26,13 @@ export default function Pagination({ totalPages = 20, theme = "dark" }: Paginati
             key={page}
             type="button"
             onClick={() => setCurrent(page)}
-            className="w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors"
+            className="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-medium transition-colors"
             style={{
               backgroundColor: isActive
-                ? "#6CEEEE"
+                ? activeBg
                 : "transparent",
               color: isActive
-                ? "#131B23"
+                ? activeText
                 : isDark ? "rgba(236,235,228,0.6)" : "#555",
               fontFamily: "DM Sans, sans-serif",
             }}
@@ -42,7 +44,7 @@ export default function Pagination({ totalPages = 20, theme = "dark" }: Paginati
 
       {/* Ellipsis */}
       <span
-        className="w-8 h-8 flex items-center justify-center text-sm"
+        className="flex h-9 w-9 items-center justify-center text-sm"
         style={{ color: isDark ? "rgba(236,235,228,0.4)" : "#999" }}
       >
         ...
@@ -52,10 +54,10 @@ export default function Pagination({ totalPages = 20, theme = "dark" }: Paginati
       <button
         type="button"
         onClick={() => setCurrent(totalPages)}
-        className="w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors"
+        className="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-medium transition-colors"
         style={{
-          backgroundColor: current === totalPages ? "#6CEEEE" : "transparent",
-          color: current === totalPages ? "#131B23" : isDark ? "rgba(236,235,228,0.6)" : "#555",
+          backgroundColor: current === totalPages ? activeBg : "transparent",
+          color: current === totalPages ? activeText : isDark ? "rgba(236,235,228,0.6)" : "#555",
           fontFamily: "DM Sans, sans-serif",
         }}
       >
@@ -66,7 +68,7 @@ export default function Pagination({ totalPages = 20, theme = "dark" }: Paginati
       <button
         type="button"
         onClick={() => setCurrent(Math.min(current + 1, totalPages))}
-        className="px-3 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors"
+        className="flex h-9 items-center justify-center rounded-xl px-4 text-sm font-medium transition-colors"
         style={{
           color: isDark ? "rgba(236,235,228,0.6)" : "#555",
           fontFamily: "DM Sans, sans-serif",

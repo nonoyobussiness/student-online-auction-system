@@ -15,9 +15,7 @@ export default function HomeLiveBids({ theme = "dark" }: HomeLiveBidsProps) {
 
   return (
     <section aria-label="Live Bids">
-      {/* Header */}
-      <div className="flex items-center gap-2 mb-6">
-        {/* Red dot */}
+      <div className="mb-6 flex items-center gap-2">
         <span
           className="inline-block rounded-full shrink-0"
           style={{
@@ -38,38 +36,24 @@ export default function HomeLiveBids({ theme = "dark" }: HomeLiveBidsProps) {
         </h2>
       </div>
 
-      {/* Desktop grid: 4 cols */}
-      <div className="hidden md:grid grid-cols-4 gap-4">
-        {Array.from({ length: 16 }).map((_, i) => (
-          <LiveBidTile
-            key={i}
-            theme={isDark ? "dark" : "light"}
-            size="desktop"
-            isLive={i % 3 !== 2}
-          />
-        ))}
-      </div>
-
-      {/* Mobile grid: 2 cols */}
-      <div className="grid md:hidden grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-x-[45px] gap-y-[60px] sm:grid-cols-2 xl:grid-cols-4">
         {Array.from({ length: 8 }).map((_, i) => (
           <LiveBidTile
             key={i}
             theme={isDark ? "dark" : "light"}
-            size="mobile"
+            size={i < 2 ? "desktop" : "desktop"}
             isLive={i % 3 !== 2}
           />
         ))}
       </div>
 
-      {/* Mobile: View all button */}
-      <div className="md:hidden mt-4">
+      <div className="mt-4 md:hidden">
         <button
           type="button"
-          className="w-full py-3 rounded-full text-sm font-semibold flex items-center justify-center gap-1 transition"
+          className="flex w-full items-center justify-center gap-1 rounded-full py-3 text-sm font-semibold transition"
           style={{
-            backgroundColor: "#6CEEEE",
-            color: "#131B23",
+            backgroundColor: "var(--app-primary)",
+            color: "var(--app-primary-text)",
             fontFamily: "DM Sans, sans-serif",
           }}
         >
@@ -77,7 +61,6 @@ export default function HomeLiveBids({ theme = "dark" }: HomeLiveBidsProps) {
         </button>
       </div>
 
-      {/* Desktop: Pagination */}
       <div className="hidden md:block">
         <Pagination theme={theme} />
       </div>

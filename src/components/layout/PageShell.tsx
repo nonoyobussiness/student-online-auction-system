@@ -5,18 +5,14 @@
 
 import type { ReactNode } from "react";
 import { Navbar, Sidebar, MobileHeader } from "./index";
-import { useApp } from "../../context/AppContext";
 
 interface PageShellProps {
   children: ReactNode;
 }
 
 export default function PageShell({ children }: PageShellProps) {
-  const { theme } = useApp();
-  const bg = theme === "dark" ? "#0C1218" : "#ECEBE4";
-
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: bg }}>
+    <div className="flex min-h-screen flex-col bg-[var(--app-bg)] text-[var(--app-foreground)]">
       <Navbar />
       <MobileHeader />
       <div className="flex flex-1">

@@ -3,7 +3,7 @@
  */
 /* eslint-disable react-refresh/only-export-components */
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
 
 /* ─── Types ──────────────────────────────────────── */
 
@@ -99,7 +99,14 @@ const MOCK_SALES: SaleItem[] = [
 const AppContext = createContext<AppContextValue | null>(null);
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") {
+      return "dark";
+    }
+
+    const storedTheme = window.localStorage.getItem("theme");
+    return storedTheme === "light" ? "light" : "dark";
+  });
   const [balance, setBalance] = useState(2700);
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [bids, setBids] = useState<Bid[]>(MOCK_BIDS);
@@ -114,6 +121,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <AppContext.Provider

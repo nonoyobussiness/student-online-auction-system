@@ -16,12 +16,12 @@ export default function Footer({ theme = "dark" }: FooterProps) {
   const textMuted = isDark ? "rgba(236,235,228,0.5)" : "rgba(19,27,35,0.5)";
   const textLink = isDark ? "rgba(236,235,228,0.6)" : "rgba(19,27,35,0.6)";
   const borderColor = isDark ? "rgba(236,235,228,0.08)" : "rgba(19,27,35,0.1)";
-  const bgColor = isDark ? "#0C1218" : "#ECEBE4";
 
   return (
     <footer
       role="contentinfo"
-      style={{ backgroundColor: bgColor, borderTop: `1px solid ${borderColor}` }}
+      className="bg-[rgba(36,123,123,0.14)]"
+      style={{ borderTop: `1px solid ${borderColor}` }}
     >
       {/* Main footer content */}
       <div className="px-8 py-10">

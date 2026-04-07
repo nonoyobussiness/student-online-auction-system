@@ -1,132 +1,171 @@
 /**
- * Sidebar - Desktop sidebar navigation (matches design exactly)
+ * Sidebar - Minimal navigation with desktop rail and mobile drawer
  */
 
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  Clock3,
+  Home,
+  PlusSquare,
+  Settings,
+  User,
+  Wallet,
+} from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const NAV_ITEMS = [
-  {
-    label: "Home",
-    path: "/home",
-    icon: (active: boolean) => (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill={active ? "#6CEEEE" : "none"} stroke={active ? "#6CEEEE" : "#888"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
-        <path d="M9 21V12h6v9"/>
-      </svg>
-    ),
-  },
-  {
-    label: "Sell",
-    path: "/sell",
-    icon: (active: boolean) => (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={active ? "#6CEEEE" : "#888"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="9"/>
-        <line x1="12" y1="8" x2="12" y2="16"/>
-        <line x1="8" y1="12" x2="16" y2="12"/>
-      </svg>
-    ),
-  },
-  {
-    label: "History",
-    path: "/history",
-    icon: (active: boolean) => (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={active ? "#6CEEEE" : "#888"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="9"/>
-        <polyline points="12 6 12 12 16 14"/>
-      </svg>
-    ),
-  },
-  {
-    label: "Wallet Info",
-    path: "/wallet",
-    icon: (active: boolean) => (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={active ? "#6CEEEE" : "#888"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="5" width="20" height="14" rx="2"/>
-        <path d="M16 12a1 1 0 100 2 1 1 0 000-2z" fill={active ? "#6CEEEE" : "#888"} stroke="none"/>
-      </svg>
-    ),
-  },
-  {
-    label: "Settings",
-    path: "/settings",
-    icon: (active: boolean) => (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={active ? "#6CEEEE" : "#888"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
-      </svg>
-    ),
-  },
+type NavItem = {
+  label: string;
+  path: string;
+  icon: typeof Home;
+};
+
+const NAV_ITEMS: NavItem[] = [
+  { label: "Home", path: "/home", icon: Home },
+  { label: "Sell", path: "/sell", icon: PlusSquare },
+  { label: "History", path: "/history", icon: Clock3 },
+  { label: "Wallet", path: "/wallet", icon: Wallet },
+  { label: "Settings", path: "/settings", icon: Settings },
 ];
+
+function SidebarNavItem({
+  item,
+  active,
+  onClick,
+}: {
+  item: NavItem;
+  active: boolean;
+  onClick?: () => void;
+}) {
+  const Icon = item.icon;
+
+  return (
+    <Link
+      to={item.path}
+      onClick={onClick}
+      aria-current={active ? "page" : undefined}
+      className={[
+        "relative flex w-full items-center gap-3 rounded-xl px-4 py-3 text-base font-medium transition-all duration-200",
+        active
+          ? "text-[var(--app-primary)]"
+          : "text-[var(--app-muted)] hover:text-[var(--app-foreground)]",
+      ].join(" ")}
+      style={{ backgroundColor: active ? "var(--app-hover)" : "transparent" }}
+    >
+      <Icon className="h-5 w-5 shrink-0" strokeWidth={2.1} />
+      <span className="truncate">{item.label}</span>
+      {active ? (
+        <span
+          className="absolute inset-y-0 right-0 w-[3px] rounded-l-full"
+          style={{ backgroundColor: "var(--app-active-bar)" }}
+        />
+      ) : null}
+    </Link>
+  );
+}
+
+function SidebarContent({
+  pathname,
+  onNavigate,
+}: {
+  pathname: string;
+  onNavigate?: () => void;
+}) {
+  const navigate = useNavigate();
+
+  return (
+    <div
+      className="flex h-screen flex-col border-r bg-[var(--app-bg)] px-4 py-6"
+      style={{ borderColor: "var(--app-border)" }}
+    >
+      <div className="flex-1 overflow-y-auto">
+        <nav className="space-y-4">
+          {NAV_ITEMS.map((item) => (
+            <SidebarNavItem
+              key={item.path}
+              item={item}
+              active={pathname === item.path}
+              onClick={onNavigate}
+            />
+          ))}
+        </nav>
+      </div>
+
+      <button
+        type="button"
+        onClick={() => {
+          onNavigate?.();
+          navigate("/profile");
+        }}
+        className="mt-auto flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left transition hover:bg-[var(--app-hover)]"
+      >
+        <div
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-sm font-semibold"
+          style={{ backgroundColor: "var(--app-surface)", color: "var(--app-primary)" }}
+        >
+          RG
+        </div>
+        <div className="min-w-0">
+          <p className="truncate text-base font-medium text-[var(--app-foreground)]">
+            Raja the Great
+          </p>
+          <p className="truncate text-sm text-[var(--app-muted)]">
+            View profile
+          </p>
+        </div>
+        <User className="ml-auto h-5 w-5 shrink-0 text-[var(--app-muted)]" />
+      </button>
+    </div>
+  );
+}
 
 export default function Sidebar() {
   const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const openSidebar = () => setMobileOpen(true);
+    window.addEventListener("sidebar:open", openSidebar);
+    return () => window.removeEventListener("sidebar:open", openSidebar);
+  }, []);
 
   return (
-    <aside
-      className="hidden lg:flex flex-col shrink-0 border-r"
-      style={{
-        width: 120,
-        backgroundColor: "#0C1218",
-        borderColor: "rgba(236,235,228,0.08)",
-      }}
-      aria-label="Main navigation"
-    >
-      {/* Logo */}
-      <div className="px-4 pt-5 pb-6">
-        <Link to="/home" className="flex items-center gap-0">
-          <span
-            className="font-bold text-base tracking-tight"
-            style={{ color: "#ECEBE4", fontFamily: "DM Sans, sans-serif" }}
-          >
-            UniAuction
-          </span>
-        </Link>
+    <>
+      <div className="hidden w-64 shrink-0 lg:block">
+      <div className="sticky top-0 h-screen">
+          <SidebarContent pathname={location.pathname} />
+        </div>
       </div>
 
-      {/* Nav */}
-      <nav className="flex flex-col gap-1 px-3 flex-1">
-        {NAV_ITEMS.map((item) => {
-          const isActive = location.pathname === item.path;
-          return (
-            <Link
-              key={item.path + item.label}
-              to={item.path}
-              className="flex items-center gap-2.5 px-2 py-2 rounded-lg text-[13px] font-medium transition-colors relative"
-              style={{
-                color: isActive ? "#6CEEEE" : "#888",
-                backgroundColor: isActive ? "rgba(108,238,238,0.08)" : "transparent",
-              }}
-            >
-              {/* Active indicator bar */}
-              {isActive && (
-                <span
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-r-full"
-                  style={{ height: 20, backgroundColor: "#6CEEEE" }}
-                />
-              )}
-              {item.icon(isActive)}
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
-      </nav>
+      <div
+        className={[
+          "fixed inset-0 z-50 lg:hidden",
+          mobileOpen ? "pointer-events-auto" : "pointer-events-none",
+        ].join(" ")}
+        aria-hidden={!mobileOpen}
+      >
+        <button
+          type="button"
+          onClick={() => setMobileOpen(false)}
+          className={[
+            "absolute inset-0 backdrop-blur-sm transition-opacity duration-300",
+            mobileOpen ? "opacity-100" : "opacity-0",
+          ].join(" ")}
+          style={{ backgroundColor: "var(--app-overlay)" }}
+          aria-label="Close navigation menu"
+        />
 
-      {/* User at bottom */}
-      <div className="px-3 pb-5 flex items-center gap-2.5">
         <div
-          className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 overflow-hidden"
-          style={{ backgroundColor: "#1F2A36", border: "1px solid rgba(236,235,228,0.15)" }}
+          className={[
+            "absolute inset-y-0 left-0 w-72 max-w-[85vw] transition-transform duration-300",
+            mobileOpen ? "translate-x-0" : "-translate-x-full",
+          ].join(" ")}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="2">
-            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-          </svg>
-        </div>
-        <div className="min-w-0">
-          <p className="text-[11px] font-medium truncate" style={{ color: "#ECEBE4" }}>Raja the</p>
-          <p className="text-[11px] truncate" style={{ color: "#888" }}>great</p>
+          <SidebarContent
+            pathname={location.pathname}
+            onNavigate={() => setMobileOpen(false)}
+          />
         </div>
       </div>
-    </aside>
+    </>
   );
 }

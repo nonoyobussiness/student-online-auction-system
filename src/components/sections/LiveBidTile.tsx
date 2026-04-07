@@ -3,8 +3,10 @@
  * Layout/spacing stays in Tailwind; hex palette lives in index.css @theme.
  */
 
+import { useMemo, useState } from "react";
 import { Badge } from "../ui";
 import clsx from "clsx";
+import BidModal, { type BidModalData } from "./BidModal";
 
 export type LiveBidTileTheme = "dark" | "light";
 export type LiveBidTileSize = "desktop" | "mobile";
@@ -77,49 +79,95 @@ export function LiveBidTile({ theme, size, isLive }: LiveBidTileProps) {
   const s = SIZE[size];
   const t = THEME[theme];
   const badgeTheme = theme === "dark" ? "dark" : "light";
+  const [showBidModal, setShowBidModal] = useState(false);
+  const [bidAmount, setBidAmount] = useState("96");
+
+  const modalData = useMemo<BidModalData>(
+    () => ({
+      id: `${theme}-${size}-${isLive ? "live" : "ended"}`,
+      title: isLive ? "MacBook Air M2 for Campus Creators" : "Mechanical Keyboard for Study Setup",
+      category: isLive ? "Electronics" : "Accessories",
+      highestBid: isLive ? 95 : 72,
+      endsAt: isLive ? "today, 11:45 PM" : "tomorrow, 04:20 PM",
+      sellerName: isLive ? "Aarav Sharma" : "Neha Reddy",
+      sellerRating: isLive ? 4.9 : 4.7,
+      imageLabel: isLive ? "MacBook Air M2" : "Mechanical Keyboard",
+      history: [
+        { bidder: "Priya M.", amount: isLive ? 95 : 72, time: "2 mins ago" },
+        { bidder: "Arjun K.", amount: isLive ? 92 : 69, time: "8 mins ago" },
+        { bidder: "Rohan P.", amount: isLive ? 88 : 65, time: "14 mins ago" },
+      ],
+    }),
+    [isLive, size, theme],
+  );
+
+  const handlePlaceBid = () => {
+    setShowBidModal(true);
+    setBidAmount(String(modalData.highestBid + 1));
+  };
+
+  const handleSubmitBid = () => {
+    setShowBidModal(false);
+  };
 
   return (
-    <div className={clsx("flex flex-col", s.root, t.shell)}>
-      <div className={clsx("relative", s.media, t.media)}>
-        <div className={clsx("absolute z-10", s.badgeInset)}>
-          <Badge
-            variant={isLive ? "live" : "ended"}
-            theme={badgeTheme}
-            size={s.badgeSize}
-          />
-        </div>
-      </div>
-
-      <div className={clsx("flex flex-1 flex-col justify-between", s.body)}>
-        <div>
-          <p className={clsx(s.time, t.time)}>00:23:44</p>
-          <p className={clsx(s.timeLabel, t.timeLabel)}>Remaining</p>
-          <p className={clsx(s.title, t.title)}>Product Title</p>
+    <>
+      <div className={clsx("flex flex-col", s.root, t.shell)}>
+        <div className={clsx("relative", s.media, t.media)}>
+          <div className={clsx("absolute z-10", s.badgeInset)}>
+            <Badge
+              variant={isLive ? "live" : "ended"}
+              theme={badgeTheme}
+              size={s.badgeSize}
+            />
+          </div>
         </div>
 
-        <div className={s.footer}>
+        <div className={clsx("flex flex-1 flex-col justify-between", s.body)}>
           <div>
-            <p className={clsx(s.bidLabel, t.bidLabel)}>Current Bid</p>
-            <p className={s.bidAmountRow}>
-              <span className={clsx("font-extrabold", t.currency)}>U</span>
-              <span
-                className={clsx(
-                  s.currencyGap,
-                  "font-jetbrains-mono",
-                  size === "mobile" && "text-[13px]",
-                  t.amount,
-                )}
-              >
-                95
-              </span>
-            </p>
+            <p className={clsx(s.time, t.time)}>00:23:44</p>
+            <p className={clsx(s.timeLabel, t.timeLabel)}>Remaining</p>
+            <p className={clsx(s.title, t.title)}>{modalData.title}</p>
           </div>
 
-          <button type="button" className={clsx(s.btn, t.btn)}>
-            Place Bid
-          </button>
+          <div className={s.footer}>
+            <div>
+              <p className={clsx(s.bidLabel, t.bidLabel)}>Current Bid</p>
+              <p className={s.bidAmountRow}>
+                <span className={clsx("font-extrabold", t.currency)}>U</span>
+                <span
+                  className={clsx(
+                    s.currencyGap,
+                    "font-jetbrains-mono",
+                    size === "mobile" && "text-[13px]",
+                    t.amount,
+                  )}
+                >
+                  {modalData.highestBid}
+                </span>
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handlePlaceBid}
+              className={clsx(s.btn, t.btn)}
+            >
+              Place Bid
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+
+      {showBidModal ? (
+        <BidModal
+          auction={modalData}
+          bidAmount={bidAmount}
+          onBidAmountChange={setBidAmount}
+          onClose={() => setShowBidModal(false)}
+          onSubmit={handleSubmitBid}
+        />
+      ) : null}
+    </>
   );
 }

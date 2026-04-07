@@ -71,10 +71,52 @@
    ============================================ */
 
 @layer base {
+  :root {
+    --app-bg: #ECEBE4;
+    --app-surface: #FFFFFF;
+    --app-surface-muted: rgba(53, 126, 126, 0.08);
+    --app-primary: #008080;
+    --app-primary-text: #ECEBE4;
+    --app-foreground: #131B23;
+    --app-muted: #5f6668;
+    --app-hover: rgba(53, 126, 126, 0.17);
+    --app-promo-bg: rgba(36, 123, 123, 0.4);
+    --app-border: rgba(19, 27, 35, 0.12);
+    --app-active-bar: #008080;
+    --app-overlay: rgba(15, 23, 42, 0.55);
+  }
+
+  .dark {
+    --app-bg: #131B23;
+    --app-surface: #17212B;
+    --app-surface-muted: rgba(53, 126, 126, 0.17);
+    --app-primary: #20B2B2;
+    --app-primary-text: #131B23;
+    --app-foreground: #ECEBE4;
+    --app-muted: #9CA3AF;
+    --app-hover: rgba(53, 126, 126, 0.17);
+    --app-promo-bg: rgba(36, 123, 123, 0.4);
+    --app-border: rgba(236, 235, 228, 0.08);
+    --app-active-bar: #18CDCD;
+    --app-overlay: rgba(2, 6, 23, 0.7);
+  }
+
   body {
     @apply antialiased;
-    background-color: hsl(var(--color-bg));
-    color: hsl(var(--color-foreground));
+    background-color: var(--app-bg);
+    color: var(--app-foreground);
+  }
+
+  @keyframes bidModalIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.96);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 
   :root {
