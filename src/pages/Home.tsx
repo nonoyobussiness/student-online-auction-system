@@ -15,47 +15,58 @@ import {
 
 export default function Home() {
   return (
-    <div
-      className="min-h-screen flex flex-col"
-      style={{ backgroundColor: "#0C1218" }}
-    >
-      {/* Top navbar (desktop only) */}
-      <Navbar />
+    <div className="min-h-screen flex flex-col bg-[#0C1218] text-white">
 
-      {/* Mobile header */}
+      {/* Navbar */}
+      <Navbar />
       <MobileHeader />
 
-      {/* Main layout: Sidebar + Content */}
       <div className="flex flex-1">
+        {/* Sidebar */}
         <Sidebar />
 
+        {/* Main Content */}
         <main className="flex-1 min-w-0 overflow-x-hidden">
-          {/* Page content */}
-          <div className="px-6 lg:px-10 py-6 max-w-5xl">
-            {/* Hero */}
+
+          {/* CENTERED CONTAINER */}
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-8 space-y-16">
+
+            {/* HERO */}
             <HeroSection />
 
-            {/* Filter + Sort */}
-            <FilterSortBar />
+            {/* FILTER + CATEGORIES (grouped) */}
+            <section className="space-y-6">
+              <FilterSortBar />
+              <CategoriesBar theme="dark" />
+            </section>
 
-            {/* Category tabs */}
-            <CategoriesBar theme="dark" />
+            {/* LIVE BIDS */}
+            <section className="space-y-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-semibold tracking-tight">
+                  Live Auctions
+                </h2>
+              </div>
 
-            {/* Live Bids grid + pagination */}
-            <div className="mt-8">
               <HomeLiveBids theme="dark" />
-            </div>
+            </section>
 
-            {/* Promo Banner */}
-            <div className="mt-10">
+            {/* PROMO */}
+            <section>
               <PromoBanner theme="dark" />
-            </div>
+            </section>
 
-            {/* How It Works */}
-            <HowItWorks theme="dark" />
+            {/* HOW IT WORKS */}
+            <section className="space-y-6">
+              <h2 className="text-2xl font-semibold tracking-tight">
+                How It Works
+              </h2>
+              <HowItWorks theme="dark" />
+            </section>
+
           </div>
 
-          {/* Footer — full width */}
+          {/* Footer */}
           <Footer theme="dark" />
         </main>
       </div>
